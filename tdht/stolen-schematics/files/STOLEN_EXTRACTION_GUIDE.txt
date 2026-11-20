@@ -1,0 +1,117 @@
+=================================================================
+STOLEN SCHEMATICS - Registry Extraction Guide
+=================================================================
+
+WHY THIS APPROACH WORKS:
+
+The challenge name is "STOLEN Schematics" - we need to STEAL the source
+code (schematics) from the Docker registry. The sync-loop.sh script IS
+the schematic we need to steal!
+
+KEY INSIGHT:
+- The "team131-fix" tag is VERY suspicious
+- It suggests another team pushed a modified version
+- This could contain the flag OR reveal the exploit method
+
+=================================================================
+QUICK START (RECOMMENDED):
+=================================================================
+
+Copy and paste the ENTIRE contents of STOLEN_ONE_COMMAND.txt into SSH.
+It will automatically:
+1. Search all registry images
+2. Extract sync-loop.sh if found
+3. Search for TDHT{} flag pattern
+4. Display results
+
+=================================================================
+MANUAL APPROACH (if Python doesn't work):
+=================================================================
+
+Follow STOLEN_STEP_BY_STEP.txt for detailed commands
+
+=================================================================
+WHAT WE'RE LOOKING FOR:
+=================================================================
+
+1. **sync-loop.sh source code**
+   - Shows the REAL config format expected
+   - Might contain the flag hardcoded
+   - Reveals how .sync directory works
+
+2. **Flag in layer files**
+   - Build-time secrets
+   - Environment variables
+   - Test/debug flags
+
+3. **Differences between versions**
+   - v1 vs team131-fix comparison
+   - What did team131 change/fix?
+
+4. **Config examples**
+   - Sample sync-request.conf files
+   - Expected format documentation
+
+=================================================================
+EXPECTED RESULTS:
+=================================================================
+
+SCENARIO A: Flag is embedded
+→ You'll see: "🎯 FLAG FOUND IN RAW DATA!"
+→ Submit it immediately
+
+SCENARIO B: sync-loop.sh revealed
+→ You'll see: "📜 FOUND: opt/mc/scripts/sync-loop.sh"
+→ Read the script to learn correct exploit method
+→ Use that to trigger the watcher properly
+
+SCENARIO C: Build secrets
+→ Environment variables or build args with flag
+→ Look for Dockerfile or build metadata
+
+=================================================================
+TROUBLESHOOTING:
+=================================================================
+
+Q: Python script fails with connection timeout
+A: Try reducing the timeout or running manual curl commands
+
+Q: All layers return 404
+A: The registry state might have changed - try different tags
+
+Q: Script runs but finds nothing
+A: The flag might be in the RUNNING container, not registry
+   Try exhaustive filesystem search again
+
+Q: "team131-fix" returns 404
+A: Tag might have been removed - focus on v1 and other tags
+
+=================================================================
+AFTER EXTRACTION:
+=================================================================
+
+If you find sync-loop.sh source code:
+1. Read it carefully to understand config format
+2. Write correct sync-request.conf
+3. Trigger the watcher
+4. Read output from .sync directory
+
+If you find the flag directly:
+1. Submit it immediately
+2. Document how you found it
+
+If nothing works:
+1. Instance might be broken/changed
+2. Ask CTF organizers for help
+3. Check if challenge is still active
+
+=================================================================
+FILES CREATED:
+=================================================================
+
+- STOLEN_ONE_COMMAND.txt - Single copy-paste solution
+- STOLEN_STEP_BY_STEP.txt - Detailed manual steps
+- stolen_extract_all_layers.py - Full Python script
+- STOLEN_PROPER_EXTRACTION.txt - Template commands
+
+=================================================================

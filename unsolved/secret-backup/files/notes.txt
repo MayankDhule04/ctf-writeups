@@ -1,0 +1,1 @@
+moved flag storage to environment - do not commit credentials to repo again

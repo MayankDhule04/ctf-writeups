@@ -1,0 +1,113 @@
+**NBT Needle - Writeup**
+
+Category: Forensics / Data Parsing
+Points: 200
+File: level.dat
+SHA1: fc167fb1101e2a68b3acb66fc146d662b4c47e01
+
+
+**Challenge Description**
+
+The Named Binary Tag (NBT) is a tree data structure used by Minecraft
+in many save files to store arbitrary data. We're given a level.dat
+file and told to find the flag hidden somewhere inside it.
+
+
+**Initial Analysis**
+
+level.dat is Minecraft's world save file, and it's stored as a
+gzip-compressed NBT blob. Before touching the content, the first step
+was just confirming the format:
+
+    Gzip-compressed
+    Contains a single root NBT compound tag
+    Standard Minecraft NBT tag types (byte, short, int, long, float,
+    double, byte array, string, list, compound, int array, long array)
+
+Since Python doesn't ship a built-in NBT parser and pulling in a
+third-party library felt like overkill for a 200-point challenge, I
+wrote a small NBT reader by hand. NBT is a pretty simple recursive
+binary format once you know the tag type IDs, so this was maybe 60
+lines of code: read a tag type byte, read a name string, then
+recursively read the payload based on the type ID (compounds and lists
+just recurse into themselves).
+
+After decompressing the gzip layer and running it through the parser,
+I had the whole save file as a nested Python dict.
+
+
+**First Pass: Searching for Obvious Strings**
+
+My first instinct was to walk the entire parsed structure recursively
+and grep every string/byte value for anything that looked like a flag
+"TDHT", "flag", "ctf", curly braces, etc.
+
+This came back empty. No luck. It's a legitimate 30+ Minecraft NBT
+structure with all the normal keys - game rules, world generation
+settings, difficulty settings, dragon fight state, and so on - so a
+blind string search wasn't going to cut it. There was no field that
+obviously screamed "flag" in its content, and my keyword filter (which
+was too narrow) missed it entirely.
+
+
+**Second Pass: Dumping the Full Tree**
+
+Instead of filtering, I dumped the entire NBT tree as a flat list of
+dot-separated paths and values, no filtering at all. This produced a
+long but fully readable listing of every key path in the save file:
+
+    .Data.thunderTime = 1
+    .Data.Difficulty = 0
+    .Data.game_rules.minecraft:mob_griefing = 1
+    .Data.LevelName = 'world'
+    .Data.spawn.pos[0] = -1584
+    ... (and many more standard Minecraft fields)
+
+Scrolling through this by eye, one entry stood out immediately near
+the bottom, buried inside the player's respawn data - a section that
+has no reason to contain custom fields in a normal Minecraft world:
+
+    .Data.Player.respawn.Datas.fl4g = 'yHp5EbnVbGrfiJsBPHtM9Ovh'
+
+Two things gave it away instantly:
+1. "Datas" and "fl4g" are not real Minecraft NBT keys - the actual
+   respawn compound only ever contains pos/dimension/yaw/pitch/forced.
+2. The key is literally spelled "fl4g" - leetspeak for "flag",
+   planted by the challenge author as the needle in this haystack.
+
+This is exactly what the challenge name is hinting at: "NBT Needle" -
+a needle (the flag) hidden in a haystack (a huge, legitimate-looking
+NBT tree with dozens of real fields to sift through).
+
+
+**Extracting the Flag**
+
+The value found was:
+
+    yHp5EbnVbGrfiJsBPHtM9Ovh
+
+I checked whether this was base64-encoded (it's 24 characters, which
+is a plausible base64 length), but decoding it didn't produce readable
+text - it was just random bytes. That told me this wasn't an encoded
+layer to peel back; it was the raw flag content itself, planted
+directly as the value of a custom "fl4g" key.
+
+Wrapping it in the CTF's flag format gave the final flag:
+
+    TDHT{yHp5EbnVbGrfiJsBPHtM9Ovh}
+
+
+**Summary**
+
+1. Recognized level.dat as a gzip-compressed Minecraft NBT file.
+2. Wrote a minimal recursive NBT parser (no external libraries needed).
+3. First tried a targeted string search for flag-like keywords - found
+   nothing, because the flag value itself doesn't contain any
+   telltale substrings.
+4. Fell back to dumping the entire tree structure and manually
+   scanning every path/value pair.
+5. Spotted an out-of-place key ("fl4g") nested inside a section of the
+   NBT tree that should never contain custom data (Player.respawn).
+6. Extracted the value and wrapped it in the flag format.
+
+Flag: TDHT{yHp5EbnVbGrfiJsBPHtM9Ovh}

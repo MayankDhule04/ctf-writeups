@@ -1,0 +1,92 @@
+# STOLEN SCHEMATICS - Complete Reconnaissance Script
+# Run this in SSH to gather ALL information
+
+echo "============================================"
+echo "STOLEN SCHEMATICS - Complete Recon"
+echo "============================================"
+
+echo -e "\n[1] USER & PERMISSIONS"
+id
+groups
+whoami
+sudo -l 2>/dev/null || echo "No sudo"
+
+echo -e "\n[2] FIND ALL FLAGS"
+find / -type f -readable 2>/dev/null | xargs grep -l "TDHT{" 2>/dev/null
+find / -name "*flag*" -type f 2>/dev/null | grep -v -E "(proc|sys)"
+
+echo -e "\n[3] ENVIRONMENT VARIABLES"
+env | sort
+echo "--- Watcher env (if accessible) ---"
+cat /proc/16/environ 2>/dev/null | tr '\0' '\n' | sort
+
+echo -e "\n[4] REGISTRY EXPLORATION"
+curl -s http://172.27.0.1:5000/v2/_catalog 2>/dev/null || echo "Registry not accessible"
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/tags/list 2>/dev/null || echo "Tags endpoint failed"
+
+echo -e "\n[5] RUNNING PROCESSES"
+ps aux | head -20
+ps aux | grep sync
+
+echo -e "\n[6] NETWORK CONNECTIONS"
+netstat -tulpn 2>/dev/null || ss -tulpn 2>/dev/null
+
+echo -e "\n[7] INTERESTING FILES IN /OPT/MC"
+find /opt/mc -type f -readable 2>/dev/null | head -30
+ls -laR /opt/mc/ 2>/dev/null | grep -E "\.sh$|\.conf$|flag|sync"
+
+echo -e "\n[8] SCRIPTS CONTENT"
+cat /entrypoint.sh 2>/dev/null || cat /bin/entrypoint.sh 2>/dev/null
+
+echo -e "\n[9] CHECK PROC FILESYSTEM"
+ls -la /proc/16/ 2>/dev/null
+cat /proc/16/cmdline 2>/dev/null | tr '\0' ' '
+echo ""
+ls -la /proc/16/fd/ 2>/dev/null
+
+echo -e "\n[10] MOUNTED FILESYSTEMS"
+mount | grep -v "proc\|sys"
+df -h
+
+echo -e "\n[11] DOCKER INFO"
+ls -la /.dockerenv 2>/dev/null
+cat /.dockerenv 2>/dev/null
+ls -la /var/run/docker.sock 2>/dev/null
+
+echo -e "\n[12] SUID/SGID BINARIES"
+find / -perm -4000 -type f 2>/dev/null
+find / -perm -2000 -type f 2>/dev/null
+
+echo -e "\n[13] CAPABILITIES"
+getcap -r / 2>/dev/null
+
+echo -e "\n[14] WRITABLE DIRECTORIES"
+find / -type d -writable 2>/dev/null | grep -v -E "(proc|sys)" | head -20
+
+echo -e "\n[15] HOME DIRECTORY"
+ls -laR ~/
+
+echo -e "\n[16] TMP DIRECTORY"
+ls -laR /tmp/
+
+echo -e "\n[17] CHECK FOR HIDDEN FILES"
+find / -name ".*" -type f 2>/dev/null | grep -v -E "(proc|sys)" | head -50
+
+echo -e "\n[18] CHECK MINECRAFT CONFIG"
+cat /opt/mc/server.properties 2>/dev/null | head -30
+
+echo -e "\n[19] SYSTEM INFO"
+uname -a
+cat /etc/os-release 2>/dev/null
+cat /proc/version
+
+echo -e "\n[20] CHECK IF WATCHER IS ACTIVE"
+echo "test123" > /opt/mc/config/test.conf
+stat /opt/mc/config/test.conf
+sleep 3
+stat /opt/mc/config/test.conf
+echo "If timestamps changed, watcher is active"
+
+echo -e "\n============================================"
+echo "RECON COMPLETE - Review output above"
+echo "============================================"

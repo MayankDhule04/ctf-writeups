@@ -1,0 +1,36 @@
+# Switch it up.
+
+**Flag:** `TDHT{9b50dac4fee96a5cd4e5b4f2a9c3d66f7a4e}`
+
+---
+
+User portal with register, login, and an `/admin` page that returns 403. Title says "Admin Privilege Escalation" so the goal is clear.
+
+Tried the register form normally — the HTML form has no action or method attributes set, but the inline JS reveals it actually POSTs JSON to `/api/register`, then `/api/login`. Registered a test account and logged in. Login response came back with the full profile:
+
+```json
+{"success": true, "profile": {"username": "hax_test", "display_name": "hax_test", "role": "user"}}
+```
+
+So there's a `role` field. The dashboard had a profile update form that POSTs to `/api/user` with just `display_name`. The JS for that endpoint had a commented-out line that was clearly left in by accident:
+
+```js
+// setStatus('Profile updated. role=' + result.role + ', display_name=' + result.display_name, 'success');
+```
+
+That tells you the update response returns `role` — meaning the server reads it back after the update. The obvious question is whether you can write it too. Sent a PATCH to `/api/user` with `role` tacked onto the payload:
+
+```json
+{"display_name": "hacker", "role": "admin"}
+```
+
+Response:
+
+```json
+{"success": true, "display_name": "hacker", "role": "admin"}
+```
+
+Server just accepted it. Hit `/admin` and got the flag.
+
+The `role` field was sitting in the same user object that the update endpoint writes to, and the server never filtered which fields were allowed in the request body. Classic mass assignment — the endpoint was designed to update `display_name` but didn't whitelist that field, so any field on the user object could be overwritten by just including it in the JSON.
+

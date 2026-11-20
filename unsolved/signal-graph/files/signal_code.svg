@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang=en>
+<title>429 Too Many Requests</title>
+<h1>Too Many Requests</h1>
+<p>This user has exceeded an allotted request count. Try again later.</p>

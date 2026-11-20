@@ -1,0 +1,89 @@
+================================================================================
+CIT CTF - SOLVED CHALLENGES SUMMARY
+================================================================================
+
+Challenge 1: A Massive Problem (Web)
+-------------------------------------
+URL: http://23.179.17.92:5556
+Vulnerability: Mass Assignment
+Flag: CIT{M@ss_@ssignm3nt_Pr1v3sc}
+
+Solution:
+- Found mass assignment vulnerability in /api/register endpoint
+- The code did record.update(incoming) which allowed overwriting the 'role' field
+- Registered with {"role": "admin"} in the JSON payload
+- Logged in and accessed /admin to get the flag
+
+Challenge 2: Debug Disaster (Web)
+----------------------------------
+URL: http://23.179.17.92:5002
+Vulnerability: Flask Debug Mode Enabled + Information Disclosure
+Flag: CIT{H1dd3n_D1r5_3v3rywh3r3}
+
+Solution:
+- Flask debug mode was enabled in production
+- Accessing /admin triggered an error with full Werkzeug traceback
+- The traceback leaked source code showing a hidden endpoint:
+  @app.route("/flg_bar")
+  def env():
+      return open(".env").read()
+- Accessed /flg_bar to retrieve the .env file containing:
+  SECRET_KEY=supersecret
+  FLAG=CIT{H1dd3n_D1r5_3v3rywh3r3}
+  DATABASE_URL=sqlite:///prod.db
+
+Challenge 3: Brainfuck Code (Misc)
+-----------------------------------
+Status: ✅ SOLVED
+Flag: CIT{Wh@t_in_th3_w0rld_i$_th1s_l@ngu@g3}
+
+Challenge 4: Layers/Base64 (Crypto)
+------------------------------------
+Status: ✅ SOLVED
+Flag: CIT{b9486c74c779db5194d6508bebbee72b}
+
+Challenge 5: PDF Forensics
+---------------------------
+Status: ✅ SOLVED (user provided)
+Flag: CIT{m0j0_eng4g3d}
+
+Challenge 6: MD5 Hash Crack
+----------------------------
+Hash: b9486c74c779db5194d6508bebbee72b
+Status: ❌ UNSOLVED
+Note: Not found in common wordlists or CrackStation
+
+Challenge 7: SHA1 Hash Crack
+-----------------------------
+Hash: 6d69c28f3a8d3ba2a07ca95bdc7646f90dfb540e
+Status: ❌ UNSOLVED
+Note: Not found in CrackStation or common wordlists
+
+Challenge 8: Star Wars Force (Crypto)
+--------------------------------------
+Numbers: 095 181 145 039 245 091...
+Status: ❌ UNSOLVED
+Note: Tried XOR, Caesar, modulo transformations - no clean output
+
+Challenge 9: Seagulls OSINT
+----------------------------
+Status: ❌ INCORRECT
+Attempted: CIT{Howell_Mill_Road_Atlanta_GA} (Flock Safety HQ)
+Attempted: CIT{Union_Avenue_New_Haven_CT} (New Haven Police HQ)
+Note: Need to find the correct location
+
+================================================================================
+SUMMARY:
+- Solved: 5 challenges
+- Unsolved: 4 challenges
+- Total Flags Captured: 5
+================================================================================
+
+Latest Flags:
+1. CIT{M@ss_@ssignm3nt_Pr1v3sc} - Mass Assignment vulnerability
+2. CIT{H1dd3n_D1r5_3v3rywh3r3} - Debug mode information disclosure
+3. CIT{Wh@t_in_th3_w0rld_i$_th1s_l@ngu@g3} - Brainfuck decoder
+4. CIT{b9486c74c779db5194d6508bebbee72b} - Base64 layers
+5. CIT{m0j0_eng4g3d} - PDF forensics
+
+================================================================================

@@ -1,0 +1,131 @@
+﻿Full decoded text:
+y7NwD-pX*%YN~H<Q::V{){L4a?pgg1$juF::HAIW<RSBx${eT?5z::<0T)J~%WM=i8PUmy::eu{X4orQ?0aRvM8A::y7LZM>B(r(Y?)PTX::Ate9L+5z!w?K-Km&::#AXc|MsCy7LM}@0D::xeZkal4QxeaBLV;2::Fwn3hwuE}}cRVbEd::y2>;n?8$rZY?*6OS::1sw9LESp{fIy0}qv::CD)VmXOvx$_1=?v-::oqT(@&>X9K{yPUKD::Vfk2*@uE<-&W(T7H::y4Wal-pOz8YMxbUX::9C~7LEV4(pFoC@k;::!GnRtJh}x$-Pg?8p::$^YMfbaWIXkRPRdQ::!worzaqvAvSRtmc|::y7NzE?#gJ<ZJB3KR::ubQsPTXDju~591mC::9wrRu!jeyY(zV?2{::1MT(oO%NIBR4LE1s::nfk1}5uE|gMRb!(u::yYeJ+?#gf6Y?)_mX::8`TLPTXVng;0r|uF::HA(c{#soxXTuO?Z0::c_YMyUnXAtd}L4Z-::qgg3O1uF4+6RusH0::yYeV~+sSy}a;iyFR::}aUVLE1(4w`z)%rs::8eGRtJS|waX-P*uP::}bZkcakQXj{JLG(e::(gg1(ipyNaNVqv=s::y4W3R*vfO;Xq-`ZQ::V`dgL+5|%oIt#nqv::BuqRu`jbwaXS=?3H::KQY@cgmNCEYvP4#c::ffl#2Wk;q5GRtm5o::y7eS;@5yA)Xr60rX::A$+iLfmini%^2Iqv::CD+RurQlxvUCv*uH::z)Xr5VbQ)KPFPUUa::jw?UqwmdQi-c?6?2::y7eqs?v;1%T(@s*X::8`S(L+3vCgiy4yq2::v<6c?E$Zx~~>}<F0::G(Y@TOqQ#;?bL*z}::%u{4&WyVyhdW(tu2::y7V+A@5x2nY?*6OS::3A$GL*`NMgg}avrs::7}wVmy%^xbh@j+pl::EbT(@s-XAj4KL)&l::Ow@{jwuE|6BRVala::y2?C#>&Z?3YMxnPX::9C~8PTNuMw?KxGkj::rVtc{!sHy2%bv?UZ::}}T((VPWM$WjP33R::bfkBp{mB>fKRymn3::y7Crf>B(@=XsT;dR::{;H*PTXDjgg}D5y4::VuOVn2ZZw%Z*i?~@::SlYMyIuNC54+K;}`::?fH$6yrQ?0aRvM82::y4WmL@5y`IZJBFnQ::)TVELfm89g;2DxrQ::&V+c?E%KxvUC(+rD::etY@bDJQ#<wlLEBO::Ju~3?juE}NIVmZ7n::yYeV`*~xU#Y@A7LW::MtQrL+3vCg+PjwrP::o8lc?E$ZwaX+y+r1::F+Zk%gwQ)KPFLF7&::IfH#JgmC6#wQ9r8*::y4WOh-pY6HX{v8hS::7+b6Lfv!kw`zr)k;::hNSRurQFwXPOf?8$::rXXqkI%WIXkpLfS#::ofH$C`uF4+XW(tuK::y7V}6@5yY?YN~5tQ::V{LELfmhxglfE(qv::CD)W<H}Ky4g-A+sb::S2T(@g(NIk^;LFah::jv1^*3q2o{9RX&Lf::y7d|++sSY5X`D@AX::A$3&PTOPKg;0vEkj::QQLc{%1Ix~xk<+sS::L(YMeoCXAtd(L)~-::vgixNarsI9yVmy&-::y4WN|+sSy)Ww&clS::7+avLEd}MwrYuzqv::2)WRu`iqyY(7n+pc::f!Y?*IiQ#;?JLG(f::2gg1hhqvLt_d1ILX::y4W2f*vUojXq-iAX::A<?lLftycg=)N)qv::K`xW(JibxvWcl?8$::i2UbSmjR}$Z?P32M::ZworzVk;!GqW;vq+::y7eS;<E~BrYnf+mX::FRZ*PThE^gg1(jk;::rYwRuq{Iy2(pf@2+::?Ka<*s$
+
+
+Segments count: 104
+Seg   0 (16 chars): 'y7NwD-pX*%YN~H<Q'
+Seg   1 (16 chars): 'V{){L4a?pgg1$juF'
+Seg   2 (16 chars): 'HAIW<RSBx${eT?5z'
+Seg   3 (16 chars): '<0T)J~%WM=i8PUmy'
+Seg   4 (16 chars): 'eu{X4orQ?0aRvM8A'
+Seg   5 (16 chars): 'y7LZM>B(r(Y?)PTX'
+Seg   6 (16 chars): 'Ate9L+5z!w?K-Km&'
+Seg   7 (16 chars): '#AXc|MsCy7LM}@0D'
+Seg   8 (16 chars): 'xeZkal4QxeaBLV;2'
+Seg   9 (16 chars): 'Fwn3hwuE}}cRVbEd'
+Seg  10 (16 chars): 'y2>;n?8$rZY?*6OS'
+Seg  11 (16 chars): '1sw9LESp{fIy0}qv'
+Seg  12 (16 chars): 'CD)VmXOvx$_1=?v-'
+Seg  13 (16 chars): 'oqT(@&>X9K{yPUKD'
+Seg  14 (16 chars): 'Vfk2*@uE<-&W(T7H'
+Seg  15 (16 chars): 'y4Wal-pOz8YMxbUX'
+Seg  16 (16 chars): '9C~7LEV4(pFoC@k;'
+Seg  17 (16 chars): '!GnRtJh}x$-Pg?8p'
+Seg  18 (16 chars): '$^YMfbaWIXkRPRdQ'
+Seg  19 (16 chars): '!worzaqvAvSRtmc|'
+Seg  20 (16 chars): 'y7NzE?#gJ<ZJB3KR'
+Seg  21 (16 chars): 'ubQsPTXDju~591mC'
+Seg  22 (16 chars): '9wrRu!jeyY(zV?2{'
+Seg  23 (16 chars): '1MT(oO%NIBR4LE1s'
+Seg  24 (16 chars): 'nfk1}5uE|gMRb!(u'
+Seg  25 (16 chars): 'yYeJ+?#gf6Y?)_mX'
+Seg  26 (16 chars): '8`TLPTXVng;0r|uF'
+Seg  27 (16 chars): 'HA(c{#soxXTuO?Z0'
+Seg  28 (16 chars): 'c_YMyUnXAtd}L4Z-'
+Seg  29 (16 chars): 'qgg3O1uF4+6RusH0'
+Seg  30 (16 chars): 'yYeV~+sSy}a;iyFR'
+Seg  31 (16 chars): '}aUVLE1(4w`z)%rs'
+Seg  32 (16 chars): '8eGRtJS|waX-P*uP'
+Seg  33 (16 chars): '}bZkcakQXj{JLG(e'
+Seg  34 (16 chars): '(gg1(ipyNaNVqv=s'
+Seg  35 (16 chars): 'y4W3R*vfO;Xq-`ZQ'
+Seg  36 (16 chars): 'V`dgL+5|%oIt#nqv'
+Seg  37 (16 chars): 'BuqRu`jbwaXS=?3H'
+Seg  38 (16 chars): 'KQY@cgmNCEYvP4#c'
+Seg  39 (16 chars): 'ffl#2Wk;q5GRtm5o'
+Seg  40 (16 chars): 'y7eS;@5yA)Xr60rX'
+Seg  41 (16 chars): 'A$+iLfmini%^2Iqv'
+Seg  42 (16 chars): 'CD+RurQlxvUCv*uH'
+Seg  43 (16 chars): 'z)Xr5VbQ)KPFPUUa'
+Seg  44 (16 chars): 'jw?UqwmdQi-c?6?2'
+Seg  45 (16 chars): 'y7eqs?v;1%T(@s*X'
+Seg  46 (16 chars): '8`S(L+3vCgiy4yq2'
+Seg  47 (16 chars): 'v<6c?E$Zx~~>}<F0'
+Seg  48 (16 chars): 'G(Y@TOqQ#;?bL*z}'
+Seg  49 (16 chars): '%u{4&WyVyhdW(tu2'
+Seg  50 (16 chars): 'y7V+A@5x2nY?*6OS'
+Seg  51 (16 chars): '3A$GL*`NMgg}avrs'
+Seg  52 (16 chars): '7}wVmy%^xbh@j+pl'
+Seg  53 (16 chars): 'EbT(@s-XAj4KL)&l'
+Seg  54 (16 chars): 'Ow@{jwuE|6BRVala'
+Seg  55 (16 chars): 'y2?C#>&Z?3YMxnPX'
+Seg  56 (16 chars): '9C~8PTNuMw?KxGkj'
+Seg  57 (16 chars): 'rVtc{!sHy2%bv?UZ'
+Seg  58 (16 chars): '}}T((VPWM$WjP33R'
+Seg  59 (16 chars): 'bfkBp{mB>fKRymn3'
+Seg  60 (16 chars): 'y7Crf>B(@=XsT;dR'
+Seg  61 (16 chars): '{;H*PTXDjgg}D5y4'
+Seg  62 (16 chars): 'VuOVn2ZZw%Z*i?~@'
+Seg  63 (16 chars): 'SlYMyIuNC54+K;}`'
+Seg  64 (16 chars): '?fH$6yrQ?0aRvM82'
+Seg  65 (16 chars): 'y4WmL@5y`IZJBFnQ'
+Seg  66 (16 chars): ')TVELfm89g;2DxrQ'
+Seg  67 (16 chars): '&V+c?E%KxvUC(+rD'
+Seg  68 (16 chars): 'etY@bDJQ#<wlLEBO'
+Seg  69 (16 chars): 'Ju~3?juE}NIVmZ7n'
+Seg  70 (16 chars): 'yYeV`*~xU#Y@A7LW'
+Seg  71 (16 chars): 'MtQrL+3vCg+PjwrP'
+Seg  72 (16 chars): 'o8lc?E$ZwaX+y+r1'
+Seg  73 (16 chars): 'F+Zk%gwQ)KPFLF7&'
+Seg  74 (16 chars): 'IfH#JgmC6#wQ9r8*'
+Seg  75 (16 chars): 'y4WOh-pY6HX{v8hS'
+Seg  76 (16 chars): '7+b6Lfv!kw`zr)k;'
+Seg  77 (16 chars): 'hNSRurQFwXPOf?8$'
+Seg  78 (16 chars): 'rXXqkI%WIXkpLfS#'
+Seg  79 (16 chars): 'ofH$C`uF4+XW(tuK'
+Seg  80 (16 chars): 'y7V}6@5yY?YN~5tQ'
+Seg  81 (16 chars): 'V{LELfmhxglfE(qv'
+Seg  82 (16 chars): 'CD)W<H}Ky4g-A+sb'
+Seg  83 (16 chars): 'S2T(@g(NIk^;LFah'
+Seg  84 (16 chars): 'jv1^*3q2o{9RX&Lf'
+Seg  85 (16 chars): 'y7d|++sSY5X`D@AX'
+Seg  86 (16 chars): 'A$3&PTOPKg;0vEkj'
+Seg  87 (16 chars): 'QQLc{%1Ix~xk<+sS'
+Seg  88 (16 chars): 'L(YMeoCXAtd(L)~-'
+Seg  89 (16 chars): 'vgixNarsI9yVmy&-'
+Seg  90 (16 chars): 'y4WN|+sSy)Ww&clS'
+Seg  91 (16 chars): '7+avLEd}MwrYuzqv'
+Seg  92 (16 chars): '2)WRu`iqyY(7n+pc'
+Seg  93 (16 chars): 'f!Y?*IiQ#;?JLG(f'
+Seg  94 (16 chars): '2gg1hhqvLt_d1ILX'
+Seg  95 (16 chars): 'y4W2f*vUojXq-iAX'
+Seg  96 (16 chars): 'A<?lLftycg=)N)qv'
+Seg  97 (16 chars): 'K`xW(JibxvWcl?8$'
+Seg  98 (16 chars): 'i2UbSmjR}$Z?P32M'
+Seg  99 (16 chars): 'ZworzVk;!GqW;vq+'
+Seg 100 (16 chars): 'y7eS;<E~BrYnf+mX'
+Seg 101 (16 chars): 'FRZ*PThE^gg1(jk;'
+Seg 102 (16 chars): 'rYwRuq{Iy2(pf@2+'
+Seg 103 ( 7 chars): '?Ka<*s$'
+
+=== Taking chars at positions from segments ===
+Pos 0: yVH<eyA#xFy1CoVy9!$!yu91ny8Hcqy}8}(yVBKfyACzjy8vG%y37EOy9r}by{VS?y)&eJyMoFIy7hro
+Pos 1: 7{A0u7tAew2sDqf4CG^w7bwMfY`A_gYaebg4`uQf7$D)w7`<(u7A}bw2CV}f7;ulf4TVtuYt8+f4+NXf
+Pos 2: N)IT{LeXZn>w)TkW~nYoNQrTkeT(YgeUGZgWdqYle++X?eS6Y{V$wT@?~tTkCHOYHWV+Y~eQlZHWbSXH
+Pos 3: w{W)XZ9ck3;9V(2a7RMrzsR(1JLcM3VVRk13gR@#SiRrUq(c@4+GV({C8c(Br*VM$mEc@3Vrck#O6Rq$
+Pos 4: DL<J4ML|ahnLm@*lLtfzEPuo}+P{yO~Ltc(RLuc2;Lu5qsL?T&ALm@j#P{(pfPny6LL?b?`L?%JhLukC
+Pos 5: -4R~o>+Mlw?EX&@-EJba?T!O5?T#U1+EJai*+`gW@frVw?+EOW@*ysw>T!V{>T2Iy@fEDj*+Egg-frI`
+Pos 6: paS%rB5s4u8SO>upVhaq#Xj%u#Xsnus1Skpv5jmk5mQbmv3$qy5`%-u&NsPmBXZur5m%Ju~3$wmpvQ%u
+Pos 7: X?BWQ(zCQE$pvXEO4}WvgDeNEgVoXFS(|Qyf|bN;yilQd;vZQVxN^XEZuHWB(DZNQy8KQExvZQCY!FWF
+Pos 8: *pxM?r!yx}r{x9<z(xIAJjyI|fnxA4y4wXNO%wCqAnx)Q1Cx#y2MxA|?MyM>@jwC?`9x#}UCw)66kwI4
+Pos 9: %g$=0(w7e}Zf$K-8p$Xv<uYBg6gXt+}waja;oaE5)ivKi%g~;hngbj63w2$f=g%50Igv<N#gaK#HwXX+
+Pos 10: Yg{iaY?LacYI_{&YF-kSZ~(RMY;Td6a`X{NXIXYGX%UP-Ti~?dYgh4BY?%WKXgZ4aZ;UwIY+XPwX`PkX
+Pos 11: N1e8R?KMBR?y1yWMoPRRJ5z4R?0u}R;z-JVqtSvRr^CFc(y>bW?}@KRMKbjRs}*+RJ2ClV@P+FQ{zOpW
+Pos 12: ~$TPv)-}LV*0=P(xCgPtB9VLb)rOLui)PLq-#=Pt62vP?@4}L(*ajLVxxvPyTDiKvBD(LmAjyL9vrfL(
+Pos 13: Hj?UMPK@Vb6}?UTb@?Rm31?E!_|?4sy%*Gv`n?4m0I*U6sy<*t6v+)anG?3m;5?;MFx+EZ7w+Fr8)?ft
+Pos 14: <u5m8Tm0;EOqvK7Uk8dcKm21(muZZHFru(=Zq3#5rquU?*qFzuOrp&lPkU3ndy~}8nrrB7Lrr78hk8Su
+Pos 15: QFzyAX&D2dSv-DHX;pQ|RC{suXF0-0RsPesQvHcoXvHa2X20}2SsllaXjZR3R4@`2QQDOnWP1&*S;$#K
+
+=== XOR adjacent segments ===
+
+Segment lengths: [16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 7]

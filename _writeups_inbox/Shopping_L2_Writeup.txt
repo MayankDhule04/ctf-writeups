@@ -1,0 +1,29 @@
+# Shopping! (Level 2)
+
+**Flag:** `TDHT{0afd0b1a5b46ab26f4929ac9a92e9f170945}`
+
+---
+
+Shopping site called Northline Market. Checked the page source and the product images are loaded like this:
+
+```
+<img src="/image.php?path=/var/www/html/bag.png" alt="Canvas Tote">
+```
+
+Classic LFI setup — a PHP script reading files off disk based on a user-controlled `path` parameter, with the full webroot path exposed in the HTML.
+
+Level 1 of this same challenge had the same endpoint with no restrictions, so tried the direct path first:
+
+```
+/image.php?path=/etc/flag.txt
+```
+
+Got back: `Are we trying to be sneaky? I don't think so.` Same for `/tmp/flag.txt`, `/etc/passwd`, anything that doesn't start with `/var/www/html`. It's a prefix check — the filter only blocks paths that don't begin with the webroot, but it doesn't normalize `../` sequences before checking.
+
+`/var/www/html/` is three directories deep, so three `../` hops escape it:
+
+```
+/image.php?path=/var/www/html/../../../etc/flag.txt
+```
+
+That satisfies the prefix check on the raw string, then PHP resolves the traversal when it actually reads the file. Got the flag straight back in the response body.

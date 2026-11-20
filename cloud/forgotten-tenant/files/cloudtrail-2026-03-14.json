@@ -1,0 +1,152 @@
+{
+  "Records": [
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-14T08:02:11Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "AssumeRole",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.44",
+      "userAgent": "aws-cli/2.15",
+      "userIdentity": {
+        "type": "IAMUser",
+        "arn": "arn:aws:iam::400875701859:user/unknown-caller",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "roleArn": "arn:aws:iam::400875701859:role/tvx-forgotten-tenant-legacy-migration-role",
+        "roleSessionName": "probe-attempt"
+      },
+      "errorCode": "AccessDenied",
+      "errorMessage": "User is not authorized to perform: sts:AssumeRole (trust policy condition sts:ExternalId not satisfied)",
+      "requestID": "a1f2e3d4-0001-4a1a-9b1b-10203040a001",
+      "eventID": "7c1a2b3c-0001-4e11-8a11-aa00bb00cc01"
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-14T08:05:47Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "AssumeRole",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.91",
+      "userAgent": "aws-sdk-python/1.34",
+      "userIdentity": {
+        "type": "IAMUser",
+        "arn": "arn:aws:iam::400875701859:user/tvx-forgotten-tenant-player",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "roleArn": "arn:aws:iam::400875701859:role/tvx-forgotten-tenant-legacy-migration-role",
+        "roleSessionName": "incident-triage",
+        "externalId": "***redacted-in-log***"
+      },
+      "responseElements": {
+        "credentials": {
+          "accessKeyId": "ASIAEXAMPLEREDACTED001",
+          "expiration": "2026-03-14T09:05:47Z"
+        },
+        "assumedRoleUser": {
+          "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-legacy-migration-role/incident-triage"
+        }
+      },
+      "requestID": "a1f2e3d4-0002-4a1a-9b1b-10203040a002",
+      "eventID": "7c1a2b3c-0002-4e11-8a11-aa00bb00cc02"
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-14T08:06:30Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "AssumeRole",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.91",
+      "userAgent": "aws-sdk-python/1.34",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-legacy-migration-role/incident-triage",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "roleArn": "arn:aws:iam::400875701859:role/tvx-forgotten-tenant-incident-response-role",
+        "roleSessionName": "incident-triage-escalated"
+      },
+      "responseElements": {
+        "credentials": {
+          "accessKeyId": "ASIAEXAMPLEREDACTED002",
+          "expiration": "2026-03-14T09:06:30Z"
+        },
+        "assumedRoleUser": {
+          "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-incident-response-role/incident-triage-escalated"
+        }
+      },
+      "requestID": "a1f2e3d4-0003-4a1a-9b1b-10203040a003",
+      "eventID": "7c1a2b3c-0003-4e11-8a11-aa00bb00cc03"
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-14T08:11:02Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "CreateMultipartUpload",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.91",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-incident-response-role/incident-triage-escalated",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "bucketName": "tvx-forgotten-tenant-forensics-pro0hid4",
+        "key": "case-ab5396cd/manifest.json"
+      },
+      "responseElements": {
+        "uploadId": "EXAMPLEUPLOADID00014MAR"
+      },
+      "requestID": "a1f2e3d4-0004-4a1a-9b1b-10203040a004",
+      "eventID": "7c1a2b3c-0004-4e11-8a11-aa00bb00cc04"
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-14T08:11:19Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "CompleteMultipartUpload",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.91",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-incident-response-role/incident-triage-escalated",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "bucketName": "tvx-forgotten-tenant-forensics-pro0hid4",
+        "key": "case-ab5396cd/manifest.json",
+        "uploadId": "EXAMPLEUPLOADID00014MAR"
+      },
+      "responseElements": {
+        "eTag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+        "location": "https://tvx-forgotten-tenant-forensics-pro0hid4.s3.us-east-1.amazonaws.com/case-ab5396cd/manifest.json"
+      },
+      "requestID": "a1f2e3d4-0005-4a1a-9b1b-10203040a005",
+      "eventID": "7c1a2b3c-0005-4e11-8a11-aa00bb00cc05"
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-14T08:40:55Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.102",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-incident-response-role/jr-analyst-session",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "bucketName": "tvx-forgotten-tenant-forensics-pro0hid4",
+        "key": "evidence.json"
+      },
+      "errorCode": "NoSuchKey",
+      "errorMessage": "The specified key does not exist.",
+      "requestID": "a1f2e3d4-0006-4a1a-9b1b-10203040a006",
+      "eventID": "7c1a2b3c-0006-4e11-8a11-aa00bb00cc06"
+    }
+  ]
+}

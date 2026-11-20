@@ -1,0 +1,47 @@
+CHAKRA RECOVERY VAULT — FRAGMENT MANIFEST
+==========================================
+Generated: 2026-09-01T03:14:31Z
+Operator: vault-daemon v4.2.1
+Status: DEGRADED
+
+[SYSTEM NOTE]
+This manifest was partially corrupted during the incident.
+Some records may be incomplete or unverifiable.
+Fragment ordering must be confirmed by cross-referencing timestamps.
+
+[fragment 01] status=VALID   hash=7c4a9f3b2e1d6a85f0c2e9b4d7a1f3c8... timestamp=1756736029 note=memory_artifact
+[fragment 02] status=INVALID hash=a3f5e2b1c9d04e76b2f8a5c1d9e4b702... timestamp=1756736067 note=CTFCROW{TRUST_THE_MANIFEST}
+[fragment 03] status=VALID   hash=e8b7d2f4a1c35690d4f8b2a7c5e1f9d3... timestamp=1756736027 note=earliest_artifact
+[fragment 04] status=CORRUPT hash=|||||||||||||||||||||||||||||||||| timestamp=??????????? note=X~@#$$corrupt$$#@~X
+[fragment 05] status=VALID   hash=1b9e4c7f3a2d0e85c1f7a9b4d2e6f0c3... timestamp=1756736030 note=browser_artifact
+[fragment 06] status=VALID   hash=f2a4e8b1d7c95306e2a0b4f8c1d9e7a5... timestamp=1756736032 note=visual_artifact
+[fragment 07] status=VALID   hash=3d7c1f9e5a2b0486c8e3f1a9d5b7c2e0... timestamp=1756736033 note=network_stream_3
+[fragment 08] status=VALID   hash=9e2f4a7c1b3d0568f4e9c2a8b1d7f5e3... timestamp=1756736034 note=encrypted_container
+
+[ORDERING_KEY]
+fragments_by_timestamp: 03,F2,01,05,??H,06,07,08
+NOTE: F2 is an internal vault segment; ??H refers to the integrity manifest epoch
+
+[CORRUPTED_RECORD]
+segment=F2
+raw_b64=CORRUPT:MFZTWDE=:END
+recovered_ts=1756736028
+status=PARTIAL
+
+[METADATA]
+vault_id=CHAKRA-VAULT-03
+incident_id=BSP-2026-0901
+analyst=automated-recovery-v4
+xor_session_key=see_visual_artifact_sync-key_field
+
+[AUDIT_TRAIL]
+1756736025 - vault daemon started
+1756736027 - fragment 03 registered (disk artifact)
+1756736028 - fragment F2 registered (manifest internal)
+1756736029 - fragment 01 registered (memory artifact)
+1756736030 - fragment 05 registered (browser artifact)
+1756736031 - integrity manifest written (fragment H epoch)
+1756736032 - fragment 06 registered (visual artifact)
+1756736033 - fragment 07 registered (network stream)
+1756736034 - fragment 08 registered (archive container)
+1756736035 - connection lost — no further records

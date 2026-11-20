@@ -1,0 +1,20 @@
+# CHAKRA Vault Integrity Manifest
+# Generated: 2026-09-01T03:14:31Z
+# Format: sha256sum compatible
+# Epoch: 1756736031
+#
+# audit_record: 'std$"ll
+#
+# NOTE: One entry below has been flagged by vault-daemon as tampered.
+#       The anomaly establishes the corruption event timeline.
+#
+cafd79e5b7e1a2e7b414ec83b3e4dd435ea5dd7cabc2fc9e77233b916346cbd3  chakra_memory.raw
+cfea6670874a0388b3b3fd4664c9283afe824ed3245855e0328405c28b1c5524  chakra_traffic.pcapng
+f1b858676caa15b903d343a855d4d6ffe6f2be32b89be6b56bf29954958bd607  fragment_03.dd
+031e8497b3c16cbf8efe0c4b2b3387fd79fb73c25af1e9b7e0551bda44f1a337  spider_eye.png
+9e6e4b94b22f7850a942f877f1cfaf84255e0b42013e9a04161b2f39947bd60a  browser_artifact.bin
+761730b0ce307ee724ee72335e4c89876e15a2df2b6256346b479702340c56cd  recovery_manifest.txt
+bd30ac4c480eceaad8d7a00448fafcf7cb59ae20ebc7c0c9ce0146e8b4da440b  damaged_archive.7z
+
+# ANOMALY DETECTED: fragment_03.dd hash does not match vault baseline.
+# Vault baseline record: see AUDIT_TRAIL in recovery_manifest.txt

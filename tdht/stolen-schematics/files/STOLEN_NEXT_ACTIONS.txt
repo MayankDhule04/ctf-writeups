@@ -1,0 +1,94 @@
+=================================================================
+STOLEN SCHEMATICS - WHAT TO DO NOW
+=================================================================
+
+CRITICAL DISCOVERIES FROM RECON:
+1. ✅ Docker registry EXISTS with 5 repositories
+2. ✅ Diagnostic images exist: infra/stolen-schematics-diagnostic
+3. ✅ /opt/mc/.sync is MOUNTED from host (shared storage!)
+4. ❌ Watcher is NOT processing configs (timestamps don't change)
+
+MOST LIKELY SOLUTION:
+The flag is in the DIAGNOSTIC image layers in the registry!
+
+=================================================================
+STEP-BY-STEP INSTRUCTIONS:
+=================================================================
+
+You're currently in SSH session. Run these commands IN ORDER:
+
+-------------------------------------------------------------------
+COMMAND 1: Quick check .sync directory
+-------------------------------------------------------------------
+ls -laR /opt/mc/.sync/
+cat /opt/mc/.sync/* 2>/dev/null
+
+-------------------------------------------------------------------
+COMMAND 2: Search diagnostic registry image (RUN THIS!)
+-------------------------------------------------------------------
+Copy and paste the entire Python script from:
+STOLEN_ULTIMATE_SEARCH.txt
+
+This will search the diagnostic image which likely contains:
+- The actual sync-loop.sh source code
+- Flag embedded in build layers
+- CTF solution hints
+
+-------------------------------------------------------------------
+COMMAND 3: If still not found, check process environments
+-------------------------------------------------------------------
+for pid in $(ps aux | awk '{print $2}'); do cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep -i "TDHT" && echo "Found in PID $pid"; done
+
+-------------------------------------------------------------------
+COMMAND 4: Nuclear option - search EVERYTHING
+-------------------------------------------------------------------
+find / -type f -readable 2>/dev/null | xargs grep -l "TDHT{" 2>/dev/null
+
+=================================================================
+WHY THE DIAGNOSTIC IMAGE?
+=================================================================
+
+The repository list shows:
+- images/stolen-schematics-game-server-prerelease (v2.5.39)
+- images/stolen-schematics-gameserver (v1) 
+- images/stolen-schematics-watcher (v1, team131-fix)
+- infra/stolen-schematics (latest)
+- infra/stolen-schematics-diagnostic (team131, team131-v2) ⭐
+
+The "diagnostic" images with "team131" tags suggest:
+1. These are debugging/diagnostic tools
+2. "team131" might be the 2 teams who solved it
+3. Diagnostic images often contain source code for debugging
+
+="Stolen Schematics" = Steal the source from the diagnostic image!
+
+=================================================================
+IF ALL ELSE FAILS:
+=================================================================
+
+1. Ask in CTF Discord/forums: "Has anyone solved Stolen Schematics? 
+   I've found the registry but can't find the flag location."
+
+2. Check if there's a hint system or writeup available
+
+3. Verify your instance is working correctly - try getting a fresh one
+
+=================================================================
+CURRENT STATUS:
+=================================================================
+
+[✅] SSH connected
+[✅] Registry discovered (172.27.0.1:5000)
+[✅] 5 repositories found
+[✅] Diagnostic images identified
+[⏳] Need to search diagnostic image layers
+[❓] Flag location unknown
+
+=================================================================
+RUN THIS NOW:
+=================================================================
+
+Copy the content from STOLEN_ULTIMATE_SEARCH.txt and paste it into
+your SSH session. It will systematically search the diagnostic image.
+
+Good luck! 🍀

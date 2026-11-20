@@ -1,0 +1,50 @@
+Current IST time: 2026-03-26 14:34:17.679135+05:30
+2pm IST timestamp: 1774513800
+
+=== Progressive header analysis on /api/confess (POST) ===
+  No headers: 403 -> {"error":"Access denied."}
+  time only (2pm): 403 -> {"error":"Access denied."}
+  time only (now): 403 -> {"error":"Access denied."}
+  time+token (2pm): 403 -> {"error":"Access denied."}
+  time+token+proof (2pm): 403 -> {"error":"Access denied."}
+  all 4 (2pm, dummy): 403 -> {"error":"Access denied."}
+  all 4 (now, dummy): 403 -> {"error":"Access denied."}
+
+=== Progressive header analysis on /api/admin (GET) ===
+  No headers: 401 -> {"error":"Unauthorized."}
+  time only (2pm): 401 -> {"error":"Unauthorized."}
+  time only (now): 401 -> {"error":"Unauthorized."}
+  time+token (2pm): 401 -> {"error":"Unauthorized."}
+  time+token+proof (2pm): 401 -> {"error":"Unauthorized."}
+  all 4 (2pm, dummy): 401 -> {"error":"Unauthorized."}
+  all 4 (now, dummy): 401 -> {"error":"Unauthorized."}
+
+=== Progressive header analysis on /api/secret (GET) ===
+  No headers: 403 -> {"error":"Nice try."}
+  time only (2pm): 403 -> {"error":"Nice try."}
+  time only (now): 403 -> {"error":"Nice try."}
+  time+token (2pm): 403 -> {"error":"Nice try."}
+  time+token+proof (2pm): 403 -> {"error":"Nice try."}
+  all 4 (2pm, dummy): 403 -> {"error":"Nice try."}
+  all 4 (now, dummy): 403 -> {"error":"Nice try."}
+
+OPTIONS /api/confess: 200
+  Date: Thu, 26 Mar 2026 09:04:27 GMT
+  Content-Type: text/html; charset=utf-8
+  Content-Length: 1
+  Connection: keep-alive
+  CF-RAY: 9e24fced3d77484d-BOM
+  allow: OPTIONS, POST
+  Content-Encoding: br
+  rndr-id: af7f9111-9487-41ec
+  vary: Accept-Encoding
+  x-render-origin-server: Werkzeug/3.1.6 Python/3.11.15
+  cf-cache-status: DYNAMIC
+  Server: cloudflare
+  alt-svc: h3=":443"; ma=86400
+  Body: 
+
+=== Checking other paths ===
+  /api/status: 200 -> {"status":"operational","uptime":"99.9%","version":"3.7.1"}
+
+  /api/validate: 403 -> {"error":"Endpoint disabled."}

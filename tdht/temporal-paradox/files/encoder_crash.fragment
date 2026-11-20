@@ -1,0 +1,13 @@
+build:6c52b90c2f26da3a6a55
+... profile walk begins at +8 ...
+... tail compare uses 0x1021 ...
+lane[0] cmp_count=4
+lane[0] state=(state+sym)&mask
+lane[0] frame edge=64
+lane[0] source selector observed near profile route table
+lane[1] cmp_count=4
+lane[1] state^=sym
+lane[1] frame edge=64
+lane[1] source selector observed near profile route table
+... share quorum required before object probe ...
+... dump truncated by watchdog ...

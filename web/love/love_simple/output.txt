@@ -1,0 +1,220 @@
+=== STEP 1: Reconnaissance ===
+
+--- Main page HTML (status 200) ---
+<!DOCTYPE html><html><head><title>Love Is Simple</title>
+<meta name="description" content="TRACECTF{HTML_m3t4_t4gs_4r3_n0t_th3_4nsw3r}">
+<meta name="keywords" content="love,time,moment,heart,2pm,IST,confess">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#000;color:#fff;overflow:hidden;height:100vh;}
+.bg{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg,#ff0844,#ffb199,#ff0844);
+background-size:400% 400%;animation:gradientShift 15s ease infinite;z-index:1;}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hearts{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+.heart-float{position:absolute;font-size:2em;animation:float 8s infinite;opacity:0.6;}
+@keyframes float{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.6;}90%{opacity:0.6;}100%{transform:translateY(-100px) rotate(360deg);opacity:0;}}
+.container{position:relative;z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:center;
+height:100vh;text-align:center;padding:20px;}
+.main-heart{font-size:8em;animation:heartbeat 1.5s infinite,rotate 20s linear infinite;filter:drop-shadow(0 0 30px rgba(255,255,255,0.8));margin-bottom:20px;}
+@keyframes heartbeat{0%,100%{transform:scale(1);}5%{transform:scale(1.2);}10%{transform:scale(1.1);}15%{transform:scale(1.25);}20%{transform:scale(1);}}
+@keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+h1{font-size:4em;font-weight:700;background:linear-gradient(45deg,#fff,#ffb199,#fff);-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s infinite;text-shadow:0 0 20px rgba(255,255,255,0.5);margin-bottom:30px;}
+@keyframes shimmer{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.love-text{font-size:1.8em;margin:15px 0;opacity:0;animation:fadeIn 2s forwards;text-shadow:0 0 10px rgba(255,255,255,0.3);}
+.love-text:nth-child(3){animation-delay:0.5s;}
+.love-text:nth-child(4){animation-delay:1s;}
+.love-text:nth-child(5){animation-delay:1.5s;}
+@keyframes fadeIn{to{opacity:1;}}
+.pulse-ring{position:absolute;width:300px;height:300px;border:3px solid rgba(255,255,255,0.5);border-radius:50%;
+animation:pulse 2s infinite;z-index:5;}
+@keyframes pulse{0%{transform:scale(0.8);opacity:1;}100%{transform:scale(2);opacity:0;}}
+.sparkle{position:absolute;width:4px;height:4px;background:#fff;border-radius:50%;animation:sparkle 2s infinite;z-index:3;}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0);}50%{opacity:1;transform:scale(1);}}
+.love-quote{position:absolute;bottom:50px;font-size:1.2em;font-style:italic;opacity:0.8;animation:glow 3s infinite;}
+@keyframes glow{0%,100%{text-shadow:0 0 5px #fff;}50%{text-shadow:0 0 20px #fff,0 0 30px #ff0844;}}
+.decoy{position:absolute;top:10px;right:10px;font-size:0.7em;opacity:0.3;font-family:monospace;cursor:pointer;}
+.decoy:hover{opacity:1;color:#ffb199;}
+.hidden{display:none;}
+.time-display{position:absolute;top:20px;left:20px;font-size:1.5em;opacity:0.4;font-family:monospace;}
+</style></head><body>
+<div class="bg"></div>
+<div class="hearts" id="hearts"></div>
+<div class="container">
+<div class="pulse-ring"></div>
+<div class="main-heart">💖</div>
+<h1>Love Is Simple</h1>
+<p class="love-text">True love waits for the right moment</p>
+<p class="love-text">Some feelings can only be expressed at the perfect time</p>
+<p class="love-text">When hearts align, magic happens</p>
+</div>
+<div class="time-display" id="clock"></div>
+<div class="love-quote">"Love is not about finding the right person, but creating the right moment"</div>
+<div class="decoy" onclick="alert('TRACECTF{n1c3_try_but_y0u_n33d_m0r3_th4n_cl1ck5}')">🔍</div>
+<div class="hidden">TRACECTF{HTML_c0mm3nts_4r3_ju5t_d1str4ct10ns}</div>
+<!-- TRACECTF{s0urc3_c0d3_w0nt_s4v3_y0u_n0w} -->
+<!-- API endpoint: /api/confess -->
+<!-- Required: x-love-time, x-love-token, x-love-proof, x-love-signature -->
+<!-- Time window: You'll have to figure this out -->
+<script>
+const heartsContainer=document.getElementById('hearts');
+function createHeart(){const heart=document.createElement('div');heart.className='heart-float';
+heart.innerHTML=['💖','💕','💗','💓','💝','❤️','💘','💞'][Math.floor(Math.random()*8)];
+heart.style.left=Math.random()*100+'%';heart.style.animationDuration=(Math.random()*5+5)+'s';
+heart.style.animationDelay=Math.random()*5+'s';heartsContainer.appendChild(heart);
+setTimeout(()=>heart.remove(),13000);}
+setInterval(createHeart,300);
+for(let i=0;i<20;i++){setTimeout(createHeart,i*200);}
+for(let i=0;i<30;i++){const sparkle=document.createElement('div');sparkle.className='sparkle';
+sparkle.style.left=Math.random()*100+'%';sparkle.style.top=Math.random()*100+'%';
+sparkle.style.animationDelay=Math.random()*2+'s';document.body.appendChild(sparkle);}
+function updateClock(){const now=new Date();document.getElementById('clock').textContent=now.toLocaleTimeString();}
+setInterval(updateClock,1000);updateClock();
+// Decoy flag in JS: TRACECTF{j4v4scr1pt_1s_n0t_th3_s0lut10n}
+// Secret endpoint hint: /api/hint (but it won't help you)
+console.log('TRACECTF{c0ns0l3_l0gs_4r3_f0r_d3bugg1ng_n0t_fl4gs}');
+console.log('Looking for hints? Try /api/hint');
+console.log('Time is everything... or is it?');
+</script>
+</body></html>
+
+--- Response Headers ---
+  Date: Thu, 26 Mar 2026 08:58:14 GMT
+  Content-Type: text/html; charset=utf-8
+  Content-Length: 2100
+  Connection: keep-alive
+  CF-RAY: 9e24f3cd1dff6eb9-BOM
+  Content-Encoding: br
+  rndr-id: d4bfff58-e899-4829
+  vary: Accept-Encoding
+  x-render-origin-server: Werkzeug/3.1.6 Python/3.11.15
+  cf-cache-status: DYNAMIC
+  Server: cloudflare
+  alt-svc: h3=":443"; ma=86400
+
+--- /api/hint (status 200) ---
+{"hint":"Try again when the moon is full."}
+
+
+--- /api/secret GET (status 403) ---
+{"error":"Nice try."}
+
+
+--- /api/admin GET (status 401) ---
+{"error":"Unauthorized."}
+
+
+--- /api/confess POST json (status 403) ---
+{"error":"Access denied."}
+
+
+--- /api/confess GET (status 405) ---
+<!doctype html>
+<html lang=en>
+<title>405 Method Not Allowed</title>
+<h1>Method Not Allowed</h1>
+<p>The method is not allowed for the requested URL.</p>
+
+
+--- /api/validate GET (status 403) ---
+{"error":"Endpoint disabled."}
+
+
+--- /api/time GET (status 403) ---
+{"error":"Endpoint disabled."}
+
+
+--- /api/status GET (status 200) ---
+{"status":"operational","uptime":"99.9%","version":"3.7.1"}
+
+
+
+=== STEP 2: Header-Based Auth ===
+Current timestamp: 1774515500
+  /api/secret with X-Time: 403 -> {"error":"Nice try."}
+
+  /api/secret with X-Timestamp: 403 -> {"error":"Nice try."}
+
+  /api/secret with X-Auth-Time: 403 -> {"error":"Nice try."}
+
+  /api/secret with Time: 403 -> {"error":"Nice try."}
+
+  /api/secret with X-Request-Time: 403 -> {"error":"Nice try."}
+
+  /api/secret with X-Date: 403 -> {"error":"Nice try."}
+
+  POST /api/confess with X-Time: 403 -> {"error":"Access denied."}
+
+  POST /api/confess with X-Timestamp: 403 -> {"error":"Access denied."}
+
+  POST /api/confess with X-Auth-Time: 403 -> {"error":"Access denied."}
+
+  POST /api/confess with Time: 403 -> {"error":"Access denied."}
+
+  /api/admin with X-Time: 401 -> {"error":"Unauthorized."}
+
+  /api/admin with X-Timestamp: 401 -> {"error":"Unauthorized."}
+
+  /api/admin with X-Auth-Time: 401 -> {"error":"Unauthorized."}
+
+  /api/admin with Time: 401 -> {"error":"Unauthorized."}
+
+
+
+=== STEP 3: /api/flag analysis ===
+/api/flag status: 200
+Response headers:
+  Date: Thu, 26 Mar 2026 08:58:27 GMT
+  Content-Type: application/json
+  Content-Length: 1893
+  Connection: keep-alive
+  CF-RAY: 9e24f420fbb93a22-BOM
+  Content-Encoding: br
+  rndr-id: 61b5e92d-f1c4-4bfb
+  vary: Accept-Encoding
+  x-render-origin-server: Werkzeug/3.1.6 Python/3.11.15
+  cf-cache-status: DYNAMIC
+  Server: cloudflare
+  alt-svc: h3=":443"; ma=86400
+Keys: ['flag']
+Flag length: 3232
+
+POST /api/flag: 405 -> <!doctype html>
+<html lang=en>
+<title>405 Method Not Allowed</title>
+<h1>Method Not Allowed</h1>
+<p>The method is not allowed for the requested URL.</p>
+
+
+
+=== STEP 4: Full header auth attempt ===
+Headers: {
+  "X-Time": "1774515500",
+  "X-Token": "c1491c20cf71816a98c78a7bc4af1c41",
+  "X-Proof": "957c3bd1d7618a344ab1bde25a87afe4",
+  "X-Signature": "b88a0bc5a1e8af24a316c98c340146eb"
+}
+
+GET /api/secret with full headers: 403
+{"error":"Nice try."}
+
+
+GET /api/admin with full headers: 401
+{"error":"Unauthorized."}
+
+
+GET /api/confess with full headers: 405
+<!doctype html>
+<html lang=en>
+<title>405 Method Not Allowed</title>
+<h1>Method Not Allowed</h1>
+<p>The method is not allowed for the requested URL.</p>
+
+POST /api/confess with full headers: 403
+{"error":"Access denied."}
+
+
+GET /api/flag with full headers: 200
+{"flag":"PE3U452EFVYFQKRFLFHH4SB4||KE5DUVT3FF5UYNDBH5YGOZZR||ERVHKRR2HJEECSKXHRJFGQTY||ER5WKVB7GV5DUOR4GBKCSST6||EVLU2PLJHBIFK3LZHI5GK5L3||LA2G64SRH4YGCUTWJU4ECOR2||PE3UYWSNHZBCQ4RILE7SSUCU||LA5DUQLUMU4UYKZVPIQXOP2L||FVFW2JR2HIRUCWDDPRGXGQ3Z||G5GE27KAGBCDUOTYMVNGWYLM||GRIXQZLBIJGFMOZSHI5EM53O||GNUHO5KFPV6WGUSWMJCWIOR2||PEZD4O3OH44CI4S2LE7SUNSP||KM5DUMLTO44UYRKTOB5WMSLZ||GB6XC5R2HJBUIKKWNVME65TY||ERPTCPJ7OYWTUOTPOFKCQQBG||HZMDSS33PFIFKS2EHI5FMZTL||GIVEA5KFHQWSMVZIKQ3UQOR2||PE2FOYLMFVYE66RYLFGXQYS
+
+Done!

@@ -1,0 +1,24 @@
+OPTIONAL HINTS — READ ONE AT A TIME
+===================================
+
+Hint 1:
+The page numbers give the order. You do not need to rearrange the story.
+
+Hint 2:
+Each page explains its own decoding method in the keeper's lesson.
+
+Hint 3:
+Base64 usually has letters, numbers, and sometimes '=' at the end.
+ROT13 moves every alphabet letter thirteen places. Morse is made from
+dot-and-dash groups separated by spaces.
+
+Hint 4:
+Decode only the marked inscription on each page. Then join the four decoded
+pieces exactly as they appear, including capital letters and punctuation.
+
+Hint 5:
+Do not reverse each piece separately. Join all four pieces first, then reverse
+the complete string once.
+
+Hint 6:
+After reversing, the substitutions are 4=A, 0=o, 7=T, 3=E, and 5=S.

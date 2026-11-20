@@ -1,0 +1,50 @@
+KaalRaj APK Challenge - All Flag Candidates
+============================================
+
+TOP PRIORITY (Most Likely):
+1. Kaal{VurrAj0}
+2. Kaal{raj045735}
+3. Kaal{401745546b5c0affd89343914f88bab4c82}
+4. Kaal{set-VurrAj0}
+
+MEDIUM PRIORITY:
+5. Kaal{VXSXFK8}
+6. Kaal{01HTLdE}
+7. Kaal{k8EXiF4}
+8. Kaal{set-VXSXFK8}
+9. Kaal{set-01HTLdE}
+10. Kaal{set-k8EXiF4}
+11. Kaal{02805495315802959137323948936100352431590249555099401745546b5c0affd89343914f88bab4c82}
+12. Kaal{02805495315802959137323948936100352431590249555099}
+
+HASHED VERSIONS:
+13. Kaal{3eb024c600846db5fb4d998a1991e705}
+14. Kaal{c3b064065f6a7a0f5b16725ec9ad7e63b08122c6}
+15. Kaal{4b7c52163d6e5f30d5b32b37c73d78c0}
+16. Kaal{ac171e63d58a35457b2fd58fd5852c3c797f0c0a}
+17. Kaal{cdbdff8f43c406cf1abe134ed0fa5706}
+18. Kaal{3ebe5026dbc33e0bde0a9d46defa37a09633187a}
+19. Kaal{998a8ed5bfaeb78cdc797db43e61a217}
+20. Kaal{6fa8790918190dc5801fdf638046cc411f92c8be}
+
+OTHER VARIATIONS:
+21. Kaal{RAJ}
+22. Kaal{raj}
+23. Kaal{Raj}
+24. Kaal{rAj}
+25. Kaal{com.tencent.mm}
+26. Kaal{VurrAj0_VXSXFK8_01HTLdE_k8EXiF4}
+27. Kaal{0jArruV}
+28. Kaal{urr0}
+
+FAKE FLAGS (Confirmed Wrong):
+- Kaal{IT_My_BE}
+- Kaal{GOOD_PROGRESS}
+
+FINDINGS:
+- Main APK contains fake flags to mislead
+- Second APK is encrypted in asset_0.bin (10.6 MB)
+- Decryption key likely in asset_1.bin (135 bytes)
+- Password candidates found: VurrAj0, VXSXFK8, 01HTLdE, k8EXiF4
+- Package name: com.tencent.mm
+- Author: raj045735

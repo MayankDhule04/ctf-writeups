@@ -1,0 +1,25 @@
+
+SIREN'S SONG MANUAL ANALYSIS SUMMARY
+====================================
+
+Key Findings:
+1. Greek Pattern: Τ Π Σ Υ Υ Τ Λ Μ Ξ (19, 16, 18, 20, 20, 19, 11, 12, 14)
+2. Cipher Binary: 1100100010001000 (from Greek cipher key image)
+3. Strong Frequencies: 1000Hz (Κ), 1500Hz (Ο)
+4. Phase Information: 1000Hz → 'D', 1500Hz → 0xa2
+
+Generated Files for Manual Review:
+- sirens_manual_*.png - Multiple spectrogram views
+- sirens_band_*.png - Frequency band analysis
+- sirens_text_region_*.png - Extracted text regions
+- sirens_text_regions_overview.png - Overview with bounding boxes
+
+Manual Analysis Steps:
+1. Examine all spectrogram images for hidden text
+2. Look for Greek letters or English text in frequency domain
+3. Check if text appears when viewed at different angles/scales
+4. Look for patterns that might spell "TRACEBACK"
+5. Consider that "false sirens" might be decoy patterns
+
+The challenge states it's designed to be unsolvable by automated tools,
+so careful visual inspection of the generated images is crucial.

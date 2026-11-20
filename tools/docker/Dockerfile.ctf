@@ -1,0 +1,63 @@
+# ctfbox — a batteries-included CTF toolbox image.
+# Build:  docker build -t ctfbox:latest -f docker/Dockerfile.ctf docker
+# Use:    docker run --rm -it -v "${PWD}:/work" -w /work ctfbox:latest <tool> ...
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_BREAK_SYSTEM_PACKAGES=1 \
+    PATH="/opt/tools/bin:${PATH}" \
+    LANG=C.UTF-8
+SHELL ["/bin/bash", "-c"]
+
+# ---- OS packages (web / crypto / rev / pwn / forensics / stego / misc) ----
+RUN echo "wireshark-common wireshark-common/install-setuid boolean false" | debconf-set-selections \
+ && apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates curl wget git jq ripgrep xxd file less vim nano procps \
+      build-essential gcc g++ make pkg-config \
+      python3 python3-pip python3-dev \
+      ruby ruby-dev \
+      default-jre-headless \
+      libgmp-dev libmpfr-dev libmpc-dev libssl-dev libffi-dev \
+      nmap sqlmap netcat-openbsd dnsutils whois openssl \
+      binwalk foremost libimage-exiftool-perl steghide outguess sox imagemagick \
+      poppler-utils zbar-tools tesseract-ocr \
+      gdb binutils patchelf ltrace strace checksec \
+      p7zip-full zip unzip \
+      john hashid \
+      tshark tcpdump \
+ && rm -rf /var/lib/apt/lists/*
+
+# ---- Python tooling ----
+RUN pip3 install --no-cache-dir \
+      pwntools requests beautifulsoup4 lxml \
+      pycryptodome sympy gmpy2 z3-solver \
+      ropper name-that-hash \
+      pillow numpy scipy pyjwt
+
+# ---- Ruby tooling ----
+RUN gem install --no-document zsteg one_gadget || true
+
+# ---- Prebuilt binaries (web recon) + stegseek + jadx + gef ----
+RUN mkdir -p /opt/tools/bin /tmp/dl && cd /tmp/dl && \
+    ( wget -q https://github.com/radareorg/radare2/releases/download/5.9.8/radare2_5.9.8_amd64.deb \
+        && (apt-get update; apt-get install -y ./radare2_5.9.8_amd64.deb; rm -rf /var/lib/apt/lists/*) || echo "radare2 dl failed" ) && \
+    ( wget -q https://github.com/ffuf/ffuf/releases/download/v2.1.0/ffuf_2.1.0_linux_amd64.tar.gz \
+        && tar xzf ffuf_2.1.0_linux_amd64.tar.gz ffuf && mv ffuf /opt/tools/bin/ || echo "ffuf dl failed" ) && \
+    ( wget -q https://github.com/OJ/gobuster/releases/download/v3.6.0/gobuster_Linux_x86_64.tar.gz \
+        && tar xzf gobuster_Linux_x86_64.tar.gz && mv gobuster /opt/tools/bin/ || echo "gobuster dl failed" ) && \
+    ( wget -q https://github.com/projectdiscovery/nuclei/releases/download/v3.3.7/nuclei_3.3.7_linux_amd64.zip \
+        && unzip -o nuclei_3.3.7_linux_amd64.zip nuclei && mv nuclei /opt/tools/bin/ || echo "nuclei dl failed" ) && \
+    ( wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.6.9/httpx_1.6.9_linux_amd64.zip \
+        && unzip -o httpx_1.6.9_linux_amd64.zip httpx && mv httpx /opt/tools/bin/ || echo "httpx dl failed" ) && \
+    ( wget -q https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb \
+        && (apt-get update; apt-get install -y ./stegseek_0.6-1.deb; rm -rf /var/lib/apt/lists/*) || echo "stegseek dl failed" ) && \
+    ( wget -q https://github.com/skylot/jadx/releases/download/v1.5.0/jadx-1.5.0.zip \
+        && mkdir -p /opt/jadx && unzip -q -o jadx-1.5.0.zip -d /opt/jadx \
+        && ln -sf /opt/jadx/bin/jadx /opt/tools/bin/jadx \
+        && ln -sf /opt/jadx/bin/jadx-gui /opt/tools/bin/jadx-gui || echo "jadx dl failed" ) && \
+    ( wget -q -O /opt/tools/gef.py https://raw.githubusercontent.com/hugsy/gef/main/gef.py \
+        && echo "source /opt/tools/gef.py" > /root/.gdbinit || echo "gef dl failed" ) && \
+    chmod +x /opt/tools/bin/* 2>/dev/null; rm -rf /tmp/dl
+
+WORKDIR /work
+CMD ["/bin/bash"]

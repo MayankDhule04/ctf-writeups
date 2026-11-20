@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northline Market</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #090d16;
+            --panel: rgba(14, 18, 28, 0.9);
+            --panel-border: rgba(148, 163, 184, 0.16);
+            --text: #e5e7eb;
+            --muted: #9aa6b2;
+            --accent: #7cdbff;
+            --accent-strong: #39c6ff;
+            --shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(124, 219, 255, 0.11), transparent 26%),
+                radial-gradient(circle at 90% 10%, rgba(82, 255, 191, 0.08), transparent 18%),
+                radial-gradient(circle at bottom right, rgba(124, 219, 255, 0.08), transparent 24%),
+                linear-gradient(180deg, #060910 0%, var(--bg) 100%);
+        }
+
+        .shell {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 52px 0 42px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.4rem, 4.8vw, 4.6rem);
+            line-height: 0.96;
+            letter-spacing: -0.05em;
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .topbar {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 26px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            padding: 8px 12px;
+            border: 1px solid var(--panel-border);
+            border-radius: 999px;
+            background: rgba(14, 18, 28, 0.7);
+            color: var(--muted);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+        }
+
+        .brand::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            box-shadow: 0 0 22px rgba(124, 219, 255, 0.45);
+        }
+
+        .card {
+            padding: 22px;
+            border: 1px solid var(--panel-border);
+            border-radius: 26px;
+            background: var(--panel);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .search-row input {
+            width: 100%;
+            padding: 15px 16px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            background: rgba(5, 10, 20, 0.75);
+            color: var(--text);
+            font: inherit;
+            outline: none;
+        }
+
+        .search-row input::placeholder {
+            color: #7b8695;
+        }
+
+        .search-row input:focus {
+            border-color: rgba(124, 219, 255, 0.72);
+            box-shadow: 0 0 0 4px rgba(124, 219, 255, 0.12);
+        }
+
+        .search-row button {
+            border: 0;
+            padding: 15px 18px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #07111d;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .summary {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            margin: 4px 2px 18px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .product {
+            display: grid;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 22px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: linear-gradient(180deg, rgba(18, 24, 37, 0.95), rgba(10, 14, 22, 0.98));
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .image-shell {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 18px;
+            background: radial-gradient(circle at top, rgba(124, 219, 255, 0.09), rgba(6, 9, 16, 0.98));
+            border: 1px solid rgba(148, 163, 184, 0.14);
+        }
+
+        .image-shell img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product h2 {
+            margin: 0;
+            font-size: 1.02rem;
+            letter-spacing: -0.02em;
+        }
+
+        .product p {
+            font-size: 0.93rem;
+        }
+
+        @media (max-width: 720px) {
+            .shell { width: min(100% - 18px, 1120px); padding: 18px 0 28px; }
+            .grid { grid-template-columns: 1fr; }
+            .search-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <div class="topbar">
+            <h1>Everyday goods</h1>
+            <p>Simple essentials for a clean setup.</p>
+        </div>
+
+        <section class="card">
+            <form method="GET" class="search-row">
+                <input type="search" name="q" value="" placeholder="Search products">
+                <button type="submit">Search</button>
+            </form>
+
+            <div class="summary">
+                <span>9 products</span>
+                <span>Available now</span>
+            </div>
+
+                            <div class="grid">
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/bag.png" alt="Canvas Tote">
+                            </div>
+                            <h2>Canvas Tote</h2>
+                            <p>A plain carry-all for day-to-day errands.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/lamp.png" alt="Slate Lamp">
+                            </div>
+                            <h2>Slate Lamp</h2>
+                            <p>Soft light with a matte finish.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/bottle.png" alt="Orbit Bottle">
+                            </div>
+                            <h2>Orbit Bottle</h2>
+                            <p>A durable bottle with a narrow profile.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/book.png" alt="Paper Notebook">
+                            </div>
+                            <h2>Paper Notebook</h2>
+                            <p>A clean notebook with a stitched spine.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/plant.png" alt="Moss Plant">
+                            </div>
+                            <h2>Moss Plant</h2>
+                            <p>A low-maintenance desk plant in a ceramic pot.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/speaker.png" alt="Thread Speaker">
+                            </div>
+                            <h2>Thread Speaker</h2>
+                            <p>Compact audio for a small desk setup.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/mug.png" alt="Stone Mug">
+                            </div>
+                            <h2>Stone Mug</h2>
+                            <p>A thick ceramic mug with a smooth rim.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/tray.png" alt="Pine Tray">
+                            </div>
+                            <h2>Pine Tray</h2>
+                            <p>Keeps loose items in one place.</p>
+                        </article>
+                                            <article class="product">
+                            <div class="image-shell">
+                                <img src="/image.php?path=/var/www/html/sock.png" alt="Weekend Socks">
+                            </div>
+                            <h2>Weekend Socks</h2>
+                            <p>A small two-pack for everyday wear.</p>
+                        </article>
+                                    </div>
+                    </section>
+    </main>
+</body>
+</html>

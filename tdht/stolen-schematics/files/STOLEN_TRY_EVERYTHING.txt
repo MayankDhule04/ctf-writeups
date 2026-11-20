@@ -1,0 +1,83 @@
+# STOLEN SCHEMATICS - TRY ABSOLUTELY EVERYTHING
+# This will take 2-3 minutes but covers all possibilities
+
+#!/bin/bash
+
+echo "======================================================"
+echo "STOLEN SCHEMATICS - Exhaustive Search Starting..."
+echo "======================================================"
+
+# Quick wins first
+echo -e "\n[QUICK WIN 1] Check obvious locations"
+for f in /flag /flag.txt /TDHT.txt /root/flag.txt ~/flag.txt /tmp/flag.txt /opt/flag.txt /var/flag.txt /etc/flag.txt /home/flag.txt; do
+    if [ -r "$f" ]; then
+        echo "FOUND: $f"
+        cat "$f"
+        exit 0
+    fi
+done
+
+echo -e "\n[QUICK WIN 2] Search readable files (first 1000)"
+find / -type f -readable 2>/dev/null | head -1000 | xargs grep -l "TDHT{" 2>/dev/null | head -1
+
+echo -e "\n[QUICK WIN 3] Check current directory and home"
+grep -r "TDHT{" ~ /tmp /opt/mc/logs /opt/mc/config 2>/dev/null | head -5
+
+echo -e "\n[REGISTRY] Search all existing images"
+python3 << 'PYEND'
+import urllib.request, json, gzip, io, tarfile
+REG = "http://172.27.0.1:5000"
+def gj(u):
+    r = urllib.request.Request(u)
+    r.add_header("Accept", "*/*")
+    return json.load(urllib.request.urlopen(r, timeout=20))
+try:
+    for repo in gj(f"{REG}/v2/_catalog").get("repositories", []):
+        for tag in gj(f"{REG}/v2/{repo}/tags/list").get("tags", []):
+            try:
+                m = gj(f"{REG}/v2/{repo}/manifests/{tag}")
+                for L in m.get("layers", [])[:3]:
+                    if L.get("size", 0) > 5000000: continue
+                    d = urllib.request.urlopen(f"{REG}/v2/{repo}/blobs/{L['digest']}", timeout=10).read()
+                    try: raw = gzip.decompress(d)
+                    except: raw = d
+                    if b"TDHT{" in raw:
+                        print(f"FLAG in {repo}:{tag}!")
+                        print(raw[raw.find(b"TDHT{"):raw.find(b"TDHT{")+100].decode('utf-8','replace'))
+                        exit(0)
+            except: pass
+except: pass
+PYEND
+
+echo -e "\n[PROCESS ENV] Check all process environments"
+for p in /proc/[0-9]*; do
+    cat $p/environ 2>/dev/null | tr '\0' '\n' | grep "TDHT{" && echo "Found in $p"
+done
+
+echo -e "\n[MEMORY] Try reading process memory"
+strings /proc/*/mem 2>/dev/null | grep "TDHT{" | head -1
+
+echo -e "\n[STRINGS] Search common binaries/scripts"
+strings /entrypoint.sh /bin/entrypoint.sh 2>/dev/null | grep "TDHT{"
+find /opt/mc/scripts -type f 2>/dev/null | xargs strings 2>/dev/null | grep "TDHT{"
+
+echo -e "\n[MINECRAFT] Search MC files"
+find /opt/mc -type f -size -1M 2>/dev/null | xargs strings 2>/dev/null | grep "TDHT{" | head -1
+
+echo -e "\n[BASE64] Search for encoded flags"
+find / -type f -readable -size -100k 2>/dev/null | head -500 | xargs grep -h "VERIV" 2>/dev/null | head -3
+
+echo -e "\n[HIDDEN] Check for hidden files"
+find / -name ".*flag*" -o -name ".*TDHT*" -o -name ".*secret*" 2>/dev/null | head -10
+
+echo -e "\n[DOCS] Check documentation files"
+find / -name "README*" -o -name "HINT*" -o -name "*.md" 2>/dev/null | grep -v proc | head -20 | xargs cat 2>/dev/null | grep -i "flag\|TDHT"
+
+echo -e "\n======================================================"
+echo "Search complete. If nothing found, the challenge may be:"
+echo "1. Broken/not working correctly"
+echo "2. Requires external tool/knowledge we don't have"
+echo "3. Flag location is instance-specific or time-based"
+echo "======================================================"
+echo ""
+echo "RECOMMENDATION: Ask in CTF Discord/forums for hints"

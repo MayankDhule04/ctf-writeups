@@ -1,0 +1,48 @@
+KaalRaj - ALL Possible Flags (Priority Order)
+==============================================
+
+HASH-BASED (HIGHEST PRIORITY):
+Kaal{f7dcc1526aa7eed3145a2869c4ce342a}
+Kaal{e383c318c5f90b739c8ceec2fa71f029}
+Kaal{6564b561ebbf11cbb031cea9e69f9534}
+Kaal{a7cc5aac3d3b95f48815c31ff261e793a321c870}
+Kaal{229d0f05c7f5bc97923c87cd9a0da19741c09008}
+Kaal{ec461081612c25738c8c13b31f591dbabb551b5a}
+Kaal{8f2cc912a98d56217975ca65a26f79d8a085df2936e4c1fe927f1c2b85195421}
+Kaal{e126861e9d872eba56b946d86fef886dfbe4497011e7cfdf58d5809a49abd64d}
+Kaal{02765e1aacc108ae9f52ccc7bd4b03077af2803bb59a0462527121f2df25b4fd}
+
+SIMPLE COMBINATIONS:
+Kaal{ITMyBEGOODPROGRESS}
+Kaal{GOODPROGRESSITMyBE}
+Kaal{IT_My_BE_GOOD_PROGRESS}
+Kaal{GOOD_PROGRESS_IT_My_BE}
+Kaal{itmybegoodprogress}
+
+PASSWORD-BASED:
+Kaal{VurrAj0}
+Kaal{VXSXFK8}
+Kaal{01HTLdE}
+Kaal{k8EXiF4}
+Kaal{raj045735}
+
+WITH 1001:
+Kaal{VurrAj01001}
+Kaal{raj0457351001}
+Kaal{RAJ1001}
+Kaal{1001}
+
+HEX-BASED:
+Kaal{401745546b5c0affd89343914f88bab4c82}
+Kaal{401745546b5c0affd89343914f88bab4c8}
+Kaal{02805495315802959137323948936100352431590249555099}
+
+PACKAGE-BASED:
+Kaal{com.tencent.mm}
+Kaal{tencent}
+
+SET-BASED:
+Kaal{set-VurrAj0}
+Kaal{set-VXSXFK8}
+Kaal{set-01HTLdE}
+Kaal{set-k8EXiF4}

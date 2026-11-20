@@ -1,0 +1,25 @@
+From: a.reyes (SecOps, on-call)
+To: incident-response-rotation
+Date: 2026-03-15
+Subject: Case write-up location + logging heads-up
+
+Quick note for whoever picks this case up next.
+
+Final write-up object is under the case folder we opened yesterday
+(the 2026-03-14 trail shows the manifest upload and the case folder
+name it created — start there if you don't already have it).
+
+Filed the actual report under the handoff code they gave me on the
+call: RYII91T48V
+
+One annoyance: our S3 access-log replication pipeline was being
+re-pointed on the 15th, so anything written that day only shows the
+upload's own sub-path in the trail, not the full case-folder prefix
+in front of it. If you're cross-referencing CloudTrail exports from
+both days, you'll need to stitch the 03-14 case folder together with
+the 03-15 handoff sub-path yourself — don't assume either day's trail
+has the whole key by itself.
+
+File inside that folder is named evidence.json, same as always.
+
+-- A.

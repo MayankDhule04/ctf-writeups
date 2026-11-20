@@ -1,0 +1,93 @@
+====================================================================
+STOLEN SCHEMATICS - FINAL STATUS & RECOMMENDATION
+====================================================================
+
+INSTANCE INFO:
+- Current hostname: 48f09c6dd528 (changed from 562a90ab73f6)
+- Port: Unknown (your current connection)
+- Time remaining: ~10 minutes per instance
+
+WHAT WE'VE TRIED:
+✅ Docker registry exploration (found 5 repos)
+✅ Searched watcher image layers
+✅ Searched diagnostic image (tags 404)
+✅ Checked .sync directory (permission denied)  
+✅ Searched process environments
+✅ Searched readable files
+✅ Checked common flag locations
+✅ Attempted watcher exploit (no response)
+✅ Proc filesystem exploration
+✅ Symlink attacks
+✅ Registry layer inspection
+
+WHAT HASN'T WORKED:
+❌ /etc/flag.txt doesn't exist
+❌ Watcher doesn't process configs
+❌ .sync directory not readable
+❌ Diagnostic image tags return 404
+❌ Flag not in any registry layers we can access
+❌ Flag not in readable filesystem locations
+
+KEY MYSTERY:
+- 2 teams have solved this challenge
+- We have extensive recon and tried multiple approaches
+- Something simple/obvious is being missed
+
+====================================================================
+FINAL ACTIONS TO TRY:
+====================================================================
+
+1. RUN THIS SCRIPT (copy from STOLEN_TRY_EVERYTHING.txt)
+   This does an exhaustive search of everything possible
+
+2. IF STILL NO FLAG:
+   - Check CTF Discord/forums for hints
+   - Ask: "Solved Stolen Schematics - stuck on finding flag location"
+   - See if there's a writeup or hint system
+   - Verify instance is working correctly
+
+3. ALTERNATIVE THEORIES:
+   - Flag might be visible only at specific times
+   - Flag might require specific Minecraft client connection
+   - Challenge might have a bug/be temporarily broken
+   - Flag format might be different than TDHT{}
+
+====================================================================
+COPY-PASTE THIS NOW:
+====================================================================
+
+# Run the exhaustive search
+bash << 'EOF'
+# Paste content from STOLEN_TRY_EVERYTHING.txt here
+EOF
+
+OR more simply:
+
+# Quick comprehensive check
+find / -type f -readable 2>/dev/null | head -2000 | xargs grep -l "TDHT{" 2>/dev/null
+
+====================================================================
+IF YOU NEED TO ASK FOR HELP:
+====================================================================
+
+Post in CTF Discord/forums:
+
+"Working on Stolen Schematics. Found Docker registry at 172.27.0.1:5000 
+with 5 repos, identified sync-loop.sh watcher running as root, but can't 
+find flag location. /etc/flag.txt doesn't exist, .sync dir not readable, 
+watcher doesn't respond to configs. Any hints on where flag is located?
+Already checked: registry layers, proc filesystem, env vars, common paths."
+
+====================================================================
+BOTTOM LINE:
+====================================================================
+
+We've done extensive reconnaissance and tried every standard CTF technique.
+Since 2 teams solved it, there IS a solution - but it's either:
+
+1. Something incredibly simple we're overlooking
+2. Requires specific knowledge/technique we don't have
+3. Has changed between when they solved it and now
+4. Is bugged in current instance
+
+Time to ask for help from the CTF community!

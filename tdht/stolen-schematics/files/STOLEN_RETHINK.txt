@@ -1,0 +1,68 @@
+# STOLEN SCHEMATICS - Rethink the Approach
+# What if we're overcomplicating this?
+
+# The challenge is called "STOLEN Schematics" - what if...
+# 1. The schematics (sync-loop.sh) itself contains the flag?
+# 2. The flag is visible in a way we haven't looked?
+# 3. It's about stealing FROM the registry, not FROM the container?
+
+echo "=== APPROACH 1: Flag might be in sync-loop.sh CONTENT ==="
+# We can't read the file, but maybe we can see it another way
+
+# Check if bash can show us the script
+type sync-loop.sh 2>/dev/null
+which sync-loop.sh 2>/dev/null
+
+# Maybe it's loaded in memory somewhere
+pgrep -a bash | grep sync
+
+# Check the watcher's command line
+cat /proc/16/cmdline 2>/dev/null && echo ""
+ps -p 16 -o args=
+
+echo -e "\n=== APPROACH 2: Maybe flag is in a CONFIG the watcher reads ==="
+# What if the flag is in a config file the watcher is supposed to process?
+find /opt/mc/config -type f -readable 2>/dev/null
+cat /opt/mc/config/* 2>/dev/null
+
+echo -e "\n=== APPROACH 3: Check if there's a README or INSTRUCTIONS ==="
+find / -name "README*" -o -name "HINT*" -o -name "SOLUTION*" -o -name "FLAG*" 2>/dev/null | grep -v proc | head -20
+cat /README* 2>/dev/null
+cat /opt/mc/README* 2>/dev/null  
+cat /home/player/README* 2>/dev/null
+
+echo -e "\n=== APPROACH 4: Maybe it's in the Minecraft world data ==="
+find /opt/mc -name "*.dat" -o -name "*.nbt" -o -name "*.json" 2>/dev/null | head -20
+find /opt/mc -type f -name "*world*" 2>/dev/null
+
+echo -e "\n=== APPROACH 5: Check if flag is in simple txt files ==="
+find / -name "*.txt" -readable 2>/dev/null | grep -v proc | head -30
+cat /opt/mc/*.txt 2>/dev/null
+
+echo -e "\n=== APPROACH 6: What if the watcher DOES work but needs specific format? ==="
+# Try the EXACT format from earlier recon
+echo 'talldwarf-sync-command=CAT-FILE:/etc/passwd' > /opt/mc/config/test-sync.conf
+sleep 2
+cat /opt/mc/.sync/* 2>/dev/null
+
+echo -e "\n=== APPROACH 7: Check SSH banner or MOTD for hints ==="
+cat /etc/motd 2>/dev/null
+cat /etc/issue 2>/dev/null
+cat /etc/update-motd.d/* 2>/dev/null
+
+echo -e "\n=== APPROACH 8: Flag might be in a URL or API endpoint ==="
+# Check if there's a local web service
+wget -q -O - http://localhost/ 2>/dev/null | head -100
+wget -q -O - http://127.0.0.1/ 2>/dev/null | head -100
+wget -q -O - http://172.27.0.1/ 2>/dev/null | head -100
+
+echo -e "\n=== APPROACH 9: Check if flag is literally just sitting there ==="
+ls -la /
+ls -la /opt/
+ls -la /opt/mc/
+cat /TDHT* 2>/dev/null
+cat /opt/TDHT* 2>/dev/null
+
+echo -e "\n=== APPROACH 10: Search for base64 encoded flags ==="
+# Maybe flag is encoded
+find / -type f -readable 2>/dev/null | xargs grep -h "VERIV" 2>/dev/null | head -5  # TDHT{ in base64

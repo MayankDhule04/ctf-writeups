@@ -1,0 +1,78 @@
+{
+  "Records": [
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-15T13:02:40Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "AssumeRole",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.91",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-legacy-migration-role/incident-triage",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "roleArn": "arn:aws:iam::400875701859:role/tvx-forgotten-tenant-incident-response-role",
+        "roleSessionName": "incident-triage-escalated-day2"
+      },
+      "responseElements": {
+        "credentials": {
+          "accessKeyId": "ASIAEXAMPLEREDACTED003",
+          "expiration": "2026-03-15T14:02:40Z"
+        },
+        "assumedRoleUser": {
+          "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-incident-response-role/incident-triage-escalated-day2"
+        }
+      },
+      "requestID": "b2e3f4a5-0001-4b2b-9c2c-20304050b001",
+      "eventID": "8d2b3c4d-0001-4f22-9b22-bb11cc11dd01"
+    },
+    {
+      "_comment": "NOTE (SecOps): this account's log replication pipeline for the forensics bucket was mid-migration on 2026-03-15 -- see incident-handoff-note.txt. Object keys in THIS day's trail are recorded relative to the upload's own sub-path only; the parent case folder is NOT repeated here. Cross-reference with 2026-03-14's trail for the case folder name.",
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-15T13:19:08Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "PutObject",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.91",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-incident-response-role/incident-triage-escalated-day2",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "bucketName": "tvx-forgotten-tenant-forensics-pro0hid4",
+        "key": "handoff-RYII91T48V/evidence.json",
+        "x-amz-server-side-encryption": "AES256"
+      },
+      "responseElements": {
+        "eTag": "\"5f93f983524def3dca464469d2cf9f3e\"",
+        "versionId": "null"
+      },
+      "requestID": "b2e3f4a5-0002-4b2b-9c2c-20304050b002",
+      "eventID": "8d2b3c4d-0002-4f22-9b22-bb11cc11dd02"
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-03-15T13:21:55Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.12.4.102",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "arn": "arn:aws:sts::400875701859:assumed-role/tvx-forgotten-tenant-incident-response-role/jr-analyst-session",
+        "accountId": "400875701859"
+      },
+      "requestParameters": {
+        "bucketName": "tvx-forgotten-tenant-forensics-pro0hid4",
+        "key": "handoff-RYII91T48V/evidence.json"
+      },
+      "errorCode": "AccessDenied",
+      "errorMessage": "Access Denied",
+      "requestID": "b2e3f4a5-0003-4b2b-9c2c-20304050b003",
+      "eventID": "8d2b3c4d-0003-4f22-9b22-bb11cc11dd03"
+    }
+  ]
+}

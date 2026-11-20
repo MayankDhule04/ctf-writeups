@@ -1,0 +1,34 @@
+# caches / envs
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+hexstrike_env/
+node_modules/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# cleanup staging (not for sharing)
+_CLEANUP_TRASH/
+_UNSORTED/
+
+# secrets - never commit
+*-vpn.conf
+*.pem
+*.key
+vm_key
+vm_key.pub
+.env
+
+# large / regenerable assets
+*.img
+*.lime
+*.safetensors
+*.dmtcp
+*.onnx
+rockyou.txt
+*.journey

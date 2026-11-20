@@ -1,0 +1,29 @@
+2026-09-09T03:12:04Z controller build=6c52b90c2f26da3a6a55 candidate rollout start
+2026-09-09T03:12:07Z case=TS-1138 lane_count=2 state=mixed
+2026-09-09T03:14:11Z lane=1 slot=1 module=dx status=active
+2026-09-09T03:14:13Z lane=1 slot=3 module=cf status=active
+2026-09-09T03:09:22Z lane=1 slot=2 module=legacy-62 status=rejected
+2026-09-09T03:08:20Z lane=0 slot=0 module=legacy-18 status=rejected
+2026-09-09T03:13:16Z lane=0 slot=6 module=lc status=active
+2026-09-09T03:13:12Z lane=0 slot=2 module=c8 status=active
+2026-09-09T03:14:12Z lane=1 slot=2 module=c7 status=active
+2026-09-09T03:13:13Z lane=0 slot=3 module=cr status=active
+2026-09-09T03:09:24Z lane=1 slot=4 module=legacy-12 status=rejected
+2026-09-09T03:14:14Z lane=1 slot=4 module=g8 status=active
+2026-09-09T03:09:20Z lane=1 slot=0 module=legacy-98 status=rejected
+2026-09-09T03:08:21Z lane=0 slot=1 module=legacy-46 status=rejected
+2026-09-09T03:13:15Z lane=0 slot=5 module=ml status=active
+2026-09-09T03:14:15Z lane=1 slot=5 module=ml status=active
+2026-09-09T03:08:24Z lane=0 slot=4 module=legacy-32 status=rejected
+2026-09-09T03:13:10Z lane=0 slot=0 module=o4 status=active
+2026-09-09T03:09:23Z lane=1 slot=3 module=legacy-56 status=rejected
+2026-09-09T03:13:11Z lane=0 slot=1 module=da status=active
+2026-09-09T03:14:10Z lane=1 slot=0 module=o4 status=active
+2026-09-09T03:13:14Z lane=0 slot=4 module=x3 status=active
+2026-09-09T03:14:16Z lane=1 slot=6 module=lc status=active
+2026-09-09T03:08:23Z lane=0 slot=3 module=legacy-57 status=rejected
+2026-09-09T03:08:22Z lane=0 slot=2 module=legacy-45 status=rejected
+2026-09-09T03:09:21Z lane=1 slot=1 module=legacy-11 status=rejected
+2026-09-09T03:18:11Z profile loader: current means case-bound, complete lanes, newest generation
+2026-09-09T03:18:17Z warning: symbols preserve local cadence; absolute buckets disabled
+2026-09-09T03:26:00Z mirror egress observed

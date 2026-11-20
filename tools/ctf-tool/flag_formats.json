@@ -1,0 +1,23 @@
+
+{
+  "patterns": [
+    {"name": "generic_braces",  "regex": "[A-Za-z0-9_]{2,20}\\{[^}]{3,80}\\}", "priority": 1},
+    {"name": "CHAKRA",          "regex": "CHAKRA\\{[^}]+\\}",                   "priority": 2},
+    {"name": "flag",            "regex": "flag\\{[^}]+\\}",                     "priority": 2},
+    {"name": "CTF",             "regex": "CTF\\{[^}]+\\}",                      "priority": 2},
+    {"name": "SpaceCTF",        "regex": "SpaceCTF\\{[^}]+\\}",                 "priority": 2},
+    {"name": "KAALRAJ",         "regex": "KAALRAJ\\{[^}]+\\}",                  "priority": 2},
+    {"name": "picoCTF",         "regex": "picoCTF\\{[^}]+\\}",                  "priority": 2},
+    {"name": "HTB",             "regex": "HTB\\{[^}]+\\}",                      "priority": 2},
+    {"name": "THM",             "regex": "THM\\{[^}]+\\}",                      "priority": 2},
+    {"name": "IATCQ",           "regex": "IATCQ\\{[^}]+\\}",                    "priority": 0},
+    {"name": "K17",             "regex": "K17\\{[^}]+\\}",                      "priority": 0},
+    {"name": "dome_ctf",        "regex": "dome\\.ctf\\{[^}]+\\}",               "priority": 0},
+    {"name": "hiCTF",           "regex": "hiCTF\\{[^}]+\\}",                    "priority": 0},
+    {"name": "SSCIT",           "regex": "SSCIT\\{[^}]+\\}",                    "priority": 0},
+    {"name": "nex",             "regex": "nex\\{[^}]+\\}",                      "priority": 0},
+    {"name": "PINK",            "regex": "PINK\\{[^}]+\\}",                     "priority": 0},
+    {"name": "spooky",          "regex": "spooky\\{[^}]+\\}",                   "priority": 2},
+    {"name": "hex_flag",        "regex": "[0-9a-fA-F]{32,64}",                  "priority": 3}
+  ]
+}

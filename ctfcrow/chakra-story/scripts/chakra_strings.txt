@@ -1,0 +1,738 @@
+,46:
+)+e)),t.push(l)),1;if(o=0,r=r===
+hero-screen
+,broken:
+http://www.w3.org/XML/1998/namespace
+);function qo(e,t){switch(e){case
+dragexit
+&&a.jsx(
+audio
+)?kn(e):
+wheelDelta
+.Provider
+gotpointercapture
+accept-charset
+spellCheck
+&&typeof n.set==
++f,d.mode,p),f.return=d,f;if(typeof f==
+onMouseUp
+textarea
+keydown
++e._wrapperState.initialValue:e.defaultValue!==
+step3
+class
+,q2Title:
+transitionend
+onMouseEnter
+,{children:r.q1Title}),a.jsx(
+backwards
+root
+,onClick:r,children:
++y,k);if(typeof y==
+,{children:
+resize
+:return zf.indexOf(t.keyCode)!==-1;case
+animationend
+]}),a.jsx(
+,t===
+children
+Suspense
+golden-frame-glow
+react.portal
+}),[...Array(12)].map((s,c)=>a.jsx(
+symbol
+BROKEN
+xml:base
+,145:
+onCompositionStart
+handi_crack
+use-credentials
+,{onSubmit:c,className:
+chakra
+onTransitionEnd
+forwards
+link
+selectstart
+seeked
++u]):Dn.hasOwnProperty(o)&&u!=null&&o===
+video
+display
+radha-krishna-image-frame
+,children:[s.status===
+:ir(r),Qo(r,i,!0);break;case
+)return k!==null?null:u(d,f,
+}`,onClick:()=>{l===3&&(zt(
+TracingMarker
+,q2Placeholder:
+forceUpdate
+x-session-id
+contextmenu
+sine
+,children:s.name}),a.jsx(
+rowSpan
+hud-brand
+,desc:
+Cache
+same-origin
+,handiStatus:
+flute
+http://www.w3.org/1999/xhtml
+active
+})]})]})}),a.jsxs(
+,tagline:
+Portal
+,children:n.tagline}),a.jsxs(
+||w.key===
+&&Mt&&(w=As()):(tt=m,to=
+,onClick:n,children:
+mouseover
+focusin
+keypress
+ratechange
+header
+).concat(xn));function fu(e,t,n){var r=e.type||
+,20:
+head
+externalResourcesRequired
+,missionLabel:
+)break;if(t===
+textInput
+,children:[a.jsx(
+,cy:
+rows
+POST
+true
+,children:i.pyramidLevel}),a.jsxs(
+pointerenter
+),wr(l,t,n,
+[object Object]
+message
+✓ Solved (1/3)
+locked
+.Consumer
+,{type:
+,Meta:
++Wf)}pt(Ys,
+onPointerEnter
+,MozPrintableKey:
+,children:a.jsx(
+onDoubleClickCapture
+,{children:'
++t).trim():t+
+pointerdown
+,n.startButton,
+movementX
+Unknown
+,energy:
+Objects are not valid as a React child (found: 
+xml:space
+&&i!==
+,cx:
+Offscreen
+Escape
+include
+selected
+value
+SuspenseList
+,37:
+&&(e.name=
+modal-overlay victory-overlay
+,144:
+✓ Handi Ready (3/3)
+,children:l<3?`Questions: ${e.cluesCount}/3`:i===
+सर्व्हरशी संपर्क होऊ शकला नाही. (Network error)
+formAction
+data
+:ir(r),Ko(r);break;case
+gokul_ctf_session_id
+react-dom
+)?ti(e,t.type,n):t.hasOwnProperty(
+checkbox
+defaultValue
+,q1Desc:
+,Right:
+stat-icon
+:return t.keyCode!==229;case
++n.toString(32)),t+=
+})]})]}),a.jsxs(
+Lazy
+animationiteration
+url
+,Shift:
+__reactFiber$
+}),a.jsxs(
+Moz
+,children:l.q3Desc})]}),a.jsxs(
+copy
+hud-logo
+);return}t.hasOwnProperty(
+unknown
+drag
+muted
+multiple
+||typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE!=
+preserveAlpha
+']})]}),a.jsx(
+p-petal p1
+mouseleave
++l.key).replace(Ho,
+http://www.w3.org/2000/svg
+Transition
+,y1:
+&&Rn(e,
+charCode
+react.element
+DELETED
+@@iterator
+compositionend
+application/json
+autoplay; encrypted-media
+clap
+,children:n.heroSub}),a.jsx(
+Context
+मराठी
+,e=e!==
+onMouseUpCapture
+input[name=
+for
+Webkit
+mute
+),t(
+,17:
+password
+auxclick
+<script><\/script>
+focusout
+url(#goldChakra)
+tabIndex
+xlink:href
+onMouseMoveCapture
+Animation
+onBlur
+,{cx:
+oninput
+,{children:r.q2Title}),a.jsx(
+,112:
+__reactListeners$
+&&(Dn.hasOwnProperty(c)?(s!=null&&c===
+hero-card glass-panel
+temple
+bell
+}`,children:a.jsx(
+selectionStart
+||r===
+hidden
+)||w.ctrlKey&&(w.keyCode===83||w.key===
+:t)+
+touchend
+AnimationEnd
+app-container
+,close:
+,{viewBox:
+,style:{width:
+,cluesFound:
+test
+,resetGame:
+]})]})]}),a.jsxs(
+capture
+:it=null;break;case
+,breakHandi:
+,Up:
+select
+httpEquiv
+popstate
+);pt(Xs,
+Stage 3
+download
+pause
+&&(n=
+__bubble
+innerHTML
+footer-copyright
+5jca-sWgemI
+&&(Mt||_!==
+onCompositionEnd
+}),s.status===
+acceptCharset
+,children:[o,
+LOCKED
+,16:
+gokul_
+deltaY
+,u=[{id:
+movementY
+,Win:
+,extractFlag:
+react.suspense
+,adminLink:
+;switch(e){case
+TransitionEvent
+checked
+wheelDeltaY
+/verify-clue
+fullscreenchange
++e;return t!==null&&t.ref!==null&&typeof t.ref==
+,l.victoryTitle,
+,gokulWish:
+})]}),a.jsx(
+pointerover
+,fill:
+AnimationStart
+react.lazy
+,Control:
+,e!=null&&(n=e.replace(Ho,
+cols
+||e.value!=n)&&(e.value=
+,36:
+,children:e||
+Janmashtami Background Video & Music
+Unidentified
+modal-content glass-panel puzzle-modal
+,i.resetGame]})]})]}),a.jsxs(
+,27:
+__reactContainer$
+,onClick:c,children:[
+clipboardData
+,32:
+DehydratedFragment
+blur
+||n===
+touchcancel
+,loc1:
+xlinkHref
+,alt:
+false
+onSelect
+]})}),u&&a.jsx(
+className
+,children:[u,
+/break-handi
+react.memo
+href
+beforeinput
+hashchange
+dialog
+&&t[1]!==
+step1
+Enter
+modulepreload
+childList
++e+
+:rt=null;break;case
+LINK
+compositionstart
+,stroke:
+wheelDeltaX
+flute_note
+,startButton:
+script
+}`,children:[a.jsxs(
+)}else c!==
+Audio play error:
+:break;default:typeof i.onClick==
+_reactListening
+,r)}switch(n){case
+footer
++p,y);if(typeof p==
+UNLOCKED
+foreignObject
+)===0,l=ys(n,t[n],r);n===
+,122:
+},gf={8:
+,onClick:r,children:[
+number
++ft(r.value));break;case
+,finalHandiTitle:
+undefined
+?(p=
+,stopOpacity:
+math
+,score:
+||typeof window.document>
+&&M(
+Content-Type
+,y2:
+onPointerLeave
+,119:
+react.strict_mode
+)return d=d.get(p)||null,u(f,d,
+play
+function
+CompositionEvent
+option
+,q3Title:
+]})})]}),o&&a.jsx(
+size
+src
+,{children:l.finalHandiTitle}),a.jsx(
+modal-footer
+htmlFor
+focus
+,35:
+.split(
+success
++n),t.key!==void 0&&(i=
+Fragment
+main-game-layout
+boolean
+__reactHandles$
+close
+,Scroll:
+bg-video-wrapper
+<svg>
++e[t];if(!e.hasOwnProperty(t)&&typeof n<
+&&(Dn.hasOwnProperty(i)?s!=null&&i===
+,className:
+Text
+))},children:[a.jsx(
+makhan
+,Del:
+📋 COPY FLAG
+omit
+,113:
+,l.close,
+iframe
+,a.jsx(
+dangerouslySetInnerHTML
+,locked:
+mousedown
+,i.energy]}),a.jsx(
+aria-
++n);else if(r===
+:i===
+,{children:t||n.score||1500})]})]})]})]}),a.jsx(
+string
+span
+react.forward_ref
+,t.displayName||(e!==
+button
++n):e.value!==
+mouse
+🎉 Dahi Handi Broken! Secret flag extracted.
+);pt(qs,
+afterblur
+,q3Desc:
+animationstart
+http://www.w3.org/1998/Math/MathML
+none
+,stopColor:
+file
+,playerLabel:
+,{className:`handi-break-arena ${i?
+ at 
++encodeURIComponent(arguments[n]);return
+reset
+start
+dragend
+||typeof y==
+,submit:
+leave
+,40:
+,onClick:()=>{zt(
+image
+object with keys {
+StrictMode
+onCompositionUpdate
+'})]}),a.jsxs(
+beforeblur
+,e):s!=null&&Ki(e,i,s,o))}switch(n){case
+,115:
+Capture
+,{children:[
+Profiler
+,121:
+&&t[0]!==
+important
+]})})]}),u&&a.jsx(
+Scope
+,39:
+tel
+:r.step1?
+){if(t===0)return e;t--}else n===
+mouseout
+onClick
+onMouseMove
+modal-content glass-panel victory-modal
+dragleave
+:lt=null;break;case
+toggle
+onpropertychange
++n.toString(32)+
+card-icon-overlay
++n,n=Wn++,0<n&&(t+=
+ForwardRef
+:case
+stat-pill
+,38:
+Root
+,ru=!1;function Us(e,t){switch(e){case
+button-group
+,13:
+onMouseLeave
+,children:a.jsxs(
+onDoubleClick
+bandpass
+map-header
+click
+,{children:l<3?
+,children:i.handiStatus}),a.jsx(
+Stage 1
+react.context
+||typeof window.document.createElement>
+,children:
+documentMode
+/extract
+draggable
+deltaX
+,loc3:
+default
+http-equiv
+AnimationIteration
+source
+,x1:
+react.fragment
+submit
+modal-header
+compositionupdate
+wheel
+,116:
+div
+noscript
+triangle
+,img:
+embed
+,children:s.desc}),a.jsxs(
+bg-video-iframe
+,children:i.cluesFound}),a.jsxs(
+🔥 Break Handi!
+pointercancel
+body
+,children:r.q2Desc})]}),a.jsxs(
+🔒 Locked
+,children:u.map(s=>a.jsxs(
+,q1Placeholder:
+})})]}):a.jsx(Md,{onStart:N,lang:l,t:y}),s===
+,r.submit,
+,pyramidLevel:
+)&&Rn(e,s):typeof s==
+load
+,children:r.q1Desc})]}),a.jsxs(
+||n.data===
+dragstart
+&&n!==
+🌸 RADHEY RADHEY CTF
+focusable
++t)+'][type=
+step2
+onFocus
+reset-btn
+object
+contains
+dragover
+})]})]},s.id))}),a.jsxs(
+✓ Solved (2/3)
+&&typeof n.get==
+,{children:l.q3Title}),a.jsx(
+,{offset:
+onMouseDown
+]})})]})})}const Xd={en:{heroTitle:
+){e.removeAttribute(
+command
+together
+modal-content glass-panel puzzle-modal handi-modal
+dragenter
+<anonymous>
+,children:['
++s):i!==
+,status:r.step2?
+gokul-map-container glass-panel
+;return e&&(r=fs(e)?e.checked?
+));var xn=
+data-
+paste
+,children:i?
+pointerup
+:On.delete(t.pointerId);break;case
+,loc2:
+,12:
+,children:i.score}),a.jsx(
+onBeforeInput
+return;
+react.profiler
+TextEvent
+,117:
+✨ Broken
+action
+pointermove
+keyup
+visible
+));Lt(
+},c)),a.jsx(
+)return f=Wl(
+success-banner
+Memo
+pointer
+ at new 
+TransitionEnd
+,120:
+props
+),Kf=new Set(
+||typeof f==
+})})]}),!i&&a.jsx(
+,victorySub:
+dblclick
+,status:r.step1?
+onClickCapture
+:r.value!=null&&e.setAttribute(
+,q3Placeholder:
+,224:
+,45:
+card-badge
+cancel
+error
+pointerleave
+,onClick:n,children:[
+celebration-particles
+:ir(e),Ko(e);break;case
+,118:
+autoReverse
+drop
+AnimationEvent
+/state
+ react-mount-point-unstable 
+contentEditable
+</svg>
+text
+,heroSub:
+,{id:
+,34:
+,children:n.heroTitle}),a.jsx(
+pill-icon
++n&&(e.value=
+__reactEvents$
+player-hud glass-panel
+Stage 2
+,{children:[a.jsxs(
+react.suspense_list
+:n||typeof t!=
+mousemove
+,englishTagline:
+mouseup
+touchmove
+,{onSubmit:s,className:
+btn-primary-festive
+,strokeDasharray:
+,{className:
++e).replace(Gf,`
+`).replace(Yf,
+react.provider
+:ir(e),Qo(e,r,!1);break;case
+,{className:`pot-illustration ${i?
+xml:lang
+},mr:{heroTitle:
+);this.updater.enqueueSetState(this,e,t,
+change
+collapsed
+img
+ForwardRef(
+__html
+,unlocked:
+,l.breakHandi,
+http://www.w3.org/1999/xlink
+moz
+,Apps:
+||t===0||Nn.hasOwnProperty(e)&&Nn[e]?(
+webkit
+finalHandi
+)===-1)return typeof t.is==
+,9:
+};return
+||t===
+})]}),a.jsxs(
+lostpointercapture
++n&&(e.defaultValue=
+,{children:e.player||
+__reactProps$
+onChange
+,victoryTitle:
+invalid
+:r+
+18.3.1
+pointerout
+crossOrigin
+stat-card score-card
+||t[1]!==
+radio
+,Left:
+},kf={Alt:
+unMute
+,strokeWidth:
+}),a.jsx(
+?document:void 0),typeof e>
+,r:
+,status:r.step3?
+btn-secondary-festive
+Mode
+,r.close,
+),e()},children:[
+,children:c})]})]})]}),a.jsxs(
+);pt(
+card-real-img
+,q2Desc:
+anonymous
+,Down:
+,x2:
+English
+passive
+hud-top-row
+,children:[a.jsxs(
+,children:l.victorySub})]}),a.jsxs(
+mouseenter
+}else n=nd++,t=
+:r.step2?
+hud-player
+scroll
+react.offscreen
+enter
+,onClick:u,children:i?
+,123:
+||typeof p==
+card-img-wrapper
+touchstart
+,114:
++t+
+search
+volumechange
+,Menu:
+&&(e.name=n)}function ti(e,t,n){(t!==
+game-footer glass-panel
+input
+style
+,name:n.loc1,icon:
+,q1Title:
+cut
+,19:
+selectionchange
+onMouseDownCapture
+,18:
++e,n=1;n<arguments.length;n++)t+=
+,{x1:
+/reset
+}};function qd(){const[e,t]=H.useState({player:
++s):c!==
+?setImmediate:null;typeof navigator<
+,l.submit,
+18.3.1-next-f1338f8080-20240426
+bg-video-overlay-light
+details
+})]})]}),a.jsx(
++Sl(o,0):r,Ao(l)?(n=
+,{className:`handi-arena-card ${l===3?
+&&c!==
+modal-overlay
+svg
+pyramid
+,33:
+victory-stats-grid
+datetime-local
+?_===

