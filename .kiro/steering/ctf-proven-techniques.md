@@ -191,6 +191,52 @@ history, not secondary-source guesses.
   standard classes has failed; the correct move may just be "wait for the
   window and send the right request then."
 
+## Reversing — confirmed real techniques
+
+- **Custom round-cipher = forward-substitute → GF(2) affine-permute →
+  inverse-substitute, repeated tens of thousands of times** ("clockmaker" /
+  `movement`): a binary that "conjugates state, turns a gear, conjugates
+  back" is describing exactly this pattern. Extract the S-box (and its
+  inverse), the permutation-layer's bit-matrix table, and any whitening
+  constant via dynamic analysis (ptrace), then invert algebraically —
+  **don't brute force 50000+ rounds**. The permutation layer is often
+  *affine* (`output = M·state XOR constant`), not purely linear — check for
+  an extra XOR against a fixed buffer before concluding a popcount/parity
+  model is complete; a model that's "almost right" but missing the affine
+  constant will look very close to correct and silently produce wrong
+  output under test.
+- **Inverting a GF(2) linear/affine layer**: build the N×N bit matrix from
+  the table rows, run standard Gaussian elimination with rows packed as
+  big-integers (XOR-based reduction scales fine in pure Python up to at
+  least 256×256, ~instant, no numpy needed), confirm full rank, then
+  `inverse_output = Minv · (input XOR constant)`. This is the GF(2) analog
+  of the existing CRC32-inversion technique in this archive's skill list —
+  same idea, bigger matrix.
+- **No gdb/strace in the analysis environment is not a blocker**: a
+  hand-rolled Python ptrace debugger (ctypes + libc `ptrace()`,
+  `PTRACE_TRACEME`/`PTRACE_CONT`/`PTRACE_SINGLESTEP`/`PTRACE_GETREGS`/
+  `PTRACE_SETREGS`, breakpoints via writing `\xcc` through `/proc/{pid}/mem`)
+  is a fully viable substitute for extracting live register/memory state at
+  chosen addresses. Gotcha: files written in one shell/tool invocation may
+  not persist into the next in some sandboxes — do file creation and the
+  ptrace session in the same process/invocation.
+- **Detect self-`ptrace(PTRACE_TRACEME,...)` anti-debug checks**
+  ("clockmaker" / `movement`): grep disassembly for the raw `ptrace` syscall
+  number (`0x65`/101 on x86-64) paired with a zero/`PTRACE_TRACEME` first
+  arg — a process that's already traced will get `-EPERM` back, and binaries
+  use that as a traced/not-traced signal to branch. Patch out the
+  conditional that consumes the result (e.g. NOP a `cmovs`/`cmovne` at the
+  use site) so dynamic analysis reflects native execution. **Always verify
+  independently that the patch actually changes the artifacts you care
+  about** — in this archive's one confirmed case, the anti-debug branch was
+  real but turned out to feed an unrelated scratch buffer, not the cipher
+  tables; don't assume causation from "found an anti-debug check" alone.
+- **A target binary's own "Correct"/success output is necessary but not
+  sufficient proof of a real flag** when a separate platform does the actual
+  scoring — get platform confirmation before declaring a challenge solved,
+  even when local verification (including a fresh hash-matched redownload
+  of the binary) is airtight.
+
 ## This player's own reusable tooling (`tools/ctf-tool`)
 
 A mature Python CLI (`ctf_tool`) already exists in this player's archive

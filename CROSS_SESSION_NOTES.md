@@ -59,3 +59,73 @@ The other chat session also fully solved challenges from **Platypwn 2026**
 These aren't in this repo and may be worth adding as a new `platypwn/` event
 folder if the player wants this repo to be the complete archive going
 forward.
+
+## Second independent corroboration: EV-037 / "EV-039 Ghost 3" are the same flag
+
+A separate later session (DOME CTF "Operation Nightfall", ACT 4 "Ghost in
+the Ledger") independently reached the exact same flag
+(`dome.ctf{ghost-3:D7l28tH9BjmeHhKpoOlj0WyX}`) via the exact same technique
+(JWK header-injection forging an admin JWT, then BOLA + view-parameter mass
+assignment against `POST /api/v1/transactions/TX-9f2b6a1e4c7d8035`) while
+referring to it as "EV-039 (Ghost 3, 100pts)" rather than "EV-037". This
+confirms the repo's existing note above that these are the same underlying
+challenge reached via two differently-numbered case briefs — not a
+coincidence or mislabeling in only one session. Treat `EV-037` and
+`EV-039`/"Ghost 3" as the same challenge/flag across all notes.
+
+That same later session left two further DOME CTF ACT 4 evidence refs open,
+not yet represented anywhere in this repo (`unsolved/dome-ctf/` predates
+this investigation thread):
+
+- **EV-038 ("Ghost 2", 200pts)** — "identity behind Kage via forgotten
+  services + recovered artifacts." Not solved; no concrete lead captured
+  beyond the name.
+- **EV-037 ("Ghost 1", 200pts, "first key / a secret that opens doors")**
+  — ambiguous whether this is actually distinct from the
+  `blockchain/ghost-in-the-ledger` EV-037 already solved in this repo, or a
+  different evidence ref that happens to share the same case number across
+  sessions. Needs disambiguation against the live platform/scoreboard.
+
+Open recon leads from that session for whoever picks EV-037/038 back up:
+- `audit.hackthe.website` ("The Console") has a 21st hidden service named
+  `research-agent` in its services registry (registry reports 21 rows
+  synced, but `/api/v1/services` only returns 20 after filtering to
+  `visibility=public`).
+- `POST /api/v1/audit/search?filter=` queues an async export job (returns
+  `job_id: exp-...`).
+- `POST /api/internal/export-job` requires a header
+  `X-Nightfall-Hub-Signature` whose derivation was never found — ~700 HMAC
+  candidate constructions were tried (ops API key
+  `ops-svc-7f3c9a2e5d81b4c6`, JWKS modulus, `kid`, issuer, service names,
+  build id `a1b2c3d`; sha1/256/384/512/md5; hex/b64/b64url; multiple payload
+  shapes) plus JWT-JWK-injection and raw-RSA signature variants — all
+  rejected `401 stage:signature`.
+- A `.git` leak was found on a *different* host, `control.hackthe.website`
+  (`/.git/config`, `/.git/HEAD`, `/.git/logs/HEAD`, `/.git/index` all `200`;
+  `packed-refs` 404s). Repo: "ops service configuration for control door",
+  2 commits. Yields `API_KEY=ops-svc-7f3c9a2e5d81b4c6` and
+  `TOTP_SECRET=JBSWY3DPEHPK3PXP` — but this is confirmed to be the
+  **already-known ACT3 ops credential**, not a new secret, and does NOT
+  contain the audit host's hub-signature secret. No equivalent git/source
+  leak exists on the audit host itself (all checked, all 404 even with a
+  forged admin cookie).
+- No `export-worker`/`research` vhost was ever found reachable — the
+  signature-gated export pipeline's actual target service remains
+  unlocated.
+
+## New unsolved challenge added: `unsolved/movement-clockmaker/`
+
+A separate CTF ("ctf7"-branded, per in-binary flag format `ctf7{...}`)
+reverse-engineering challenge, "clockmaker" (binary name `movement`), was
+fully analyzed in a later session: a custom keyless block cipher (S-box
+substitution + GF(2) *affine* permutation layer, 50021 rounds, CBC-chained)
+was completely reverse-engineered and algebraically inverted (no brute
+force) via a hand-rolled ptrace debugger. The derived winding
+`ctf7{th3_cl0ck_ch1m3d_but_f0r_th3_wr0ng_h0ur_d0_n0t_subm1t}` was verified
+against a fresh hash-matched redownload of the original binary (prints
+"Correct" reproducibly) but was **rejected by the CTF platform** — root
+cause unresolved (ruled out: per-instance binary personalization, an
+anti-ptrace-induced wrong-table bug). See
+`unsolved/movement-clockmaker/MOVEMENT_CLOCKMAKER_WRITEUP.md` for the full
+method, which is independently reusable for future custom-cipher reversing
+challenges regardless of this specific flag's fate.
