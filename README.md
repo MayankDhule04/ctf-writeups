@@ -17,6 +17,7 @@ working solver where one exists.
 | `cit-ctf/` | web / OSINT / forensics | 13 | CIT CTF — many solved (CIT{...}). |
 | `cloud/` | cloud | 1 | AWS CloudTrail incident analysis. |
 | `crypto/` | crypto | 3 | Cryptography challenges. |
+| `ctf7-2026/` | networking / web / crypto / pwn / stego / DevSecOps | 16 solved, 6 blocked | CTF7 platform event (`ctf7{}`), long single-session batch. |
 | `ctfcrow/` | forensics | 3 | CTFCROW / Chakra story — memory & traffic forensics. |
 | `forensics/` | forensics | 1 | File/image forensics. |
 | `iatcq/` | rev | 2 | IATCQ — custom VM reversing. |
@@ -33,3 +34,5 @@ working solver where one exists.
 ## Flag formats seen
 
 `CIT{}` · `SpaceCTF{}` · `TDHT{}` · `PINK{}`/`PP{}` · `Kaal{}` · `tUp{}` · `CTF{}` · `ctf{name:token}` · `IATCQ{}`/`IATCQ26{}` · `CTFCROW{}` · `spooky{}` · `ctf7{}` · `TRACECTF{}` (decoys).
+
+See `ctf7-2026/README.md` for the full solve table and blocked/unsolved entries for that event.
