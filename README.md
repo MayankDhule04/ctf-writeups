@@ -27,7 +27,7 @@ working solver where one exists.
 | `spooky-halloween/` | stego / rev / misc | 4 | Halloween 'spooky' themed event. |
 | `tdht/` | web / forensics / audio | 4 | TDHT CTF. |
 | `tools/` | tooling | 3 | My reusable tooling (ctf-tool, TnsTools, docker ctfbox). |
-| `unsolved/` | mixed | 13 | Unsolved or abandoned attempts, kept for reference. |
+| `unsolved/` | mixed | 14 | Unsolved or abandoned attempts, kept for reference. Includes `movement-clockmaker/` — custom block cipher fully reverse-engineered & inverted, but platform rejected the derived flag. |
 | `web/` | web | 10 | Web exploitation (JWT/OAuth/SSTI/IDOR/XSS). |
 
 ## Flag formats seen
