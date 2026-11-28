@@ -12,6 +12,7 @@ working solver where one exists.
 
 | Event | Categories | Challenges | Notes |
 |---|---|---|---|
+| `blackhat-india-2026/` | web / blockchain / cloud / LLM security | 7 | Black Hat India 2026 Official CTF (platform: CTF7). 6 solved, 1 unsolved (UDS/CAN key recovery, blocked on a 64-bit secret). |
 | `blockchain/` | blockchain | 3 | Smart-contract challenges (ctf{name:token}). |
 | `calypso/` | crypto | 0 | Argon2 password recovery (tUp{cactus777}). |
 | `cit-ctf/` | web / OSINT / forensics | 13 | CIT CTF — many solved (CIT{...}). |
@@ -32,4 +33,4 @@ working solver where one exists.
 
 ## Flag formats seen
 
-`CIT{}` · `SpaceCTF{}` · `TDHT{}` · `PINK{}`/`PP{}` · `Kaal{}` · `tUp{}` · `CTF{}` · `ctf{name:token}` · `IATCQ{}`/`IATCQ26{}` · `CTFCROW{}` · `spooky{}` · `ctf7{}` · `TRACECTF{}` (decoys).
+`CIT{}` · `SpaceCTF{}` · `TDHT{}` · `PINK{}`/`PP{}` · `Kaal{}` · `tUp{}` · `CTF{}` · `ctf{name:token}` · `IATCQ{}`/`IATCQ26{}` · `CTFCROW{}` · `spooky{}` · `ctf7{}` · `TRACECTF{}` (decoys) · `BlackHatIndia{}`.
